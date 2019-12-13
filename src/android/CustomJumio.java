@@ -1,13 +1,43 @@
 package com.stratpoint.cordova.plugin;
 // The native Toast API
 import android.widget.Toast;
-// Cordova-required packages
-import org.apache.cordova.CallbackContext;
-import org.apache.cordova.CordovaPlugin;
-import org.apache.cordova.PluginResult;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+// Modification Start
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.util.Log;
+// Modification End
+
+//Jumio Imports
+import com.jumio.MobileSDK;
+import com.jumio.bam.*
+import com.jumio.bam.enums.CreditCardType;
+import com.jumio.core.enums.*;
+import com.jumio.core.exceptions.*;
+import com.jumio.dv.DocumentVerificationSDK;
+import com.jumio.nv.*
+import com.jumio.nv.data.document.*;
+import com.jumio.sdk.SDKExpiredException;
+//Jumio Imports End
+
+// Cordova Imports
+import org.apache.cordova.*;
+import org.apache.cordova.PluginResult.Status;
+import org.json.*;
+import java.util.*;
+
+
+// Cordova-required packages (Original)
+// import org.apache.cordova.CallbackContext;
+// import org.apache.cordova.CordovaPlugin;
+// import org.apache.cordova.PluginResult;
+// import org.json.JSONArray;
+// import org.json.JSONException;
+// import org.json.JSONObject;
+
+
+
 public class CustomJumio extends CordovaPlugin {
   private static final String DURATION_LONG = "long";
   @Override

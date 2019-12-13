@@ -1,0 +1,47 @@
+// PLUGIN GRADLE EXTENSIONS START
+repositories {
+    google()
+    jcenter()
+    maven { url 'https://mobile-sdk.jumio.com' }
+}
+
+ext {
+    SDK_VERSION = "2.12.0"
+}
+
+dependencies {
+    implementation "com.jumio.android:core:${SDK_VERSION}@aar"
+    implementation "com.jumio.android:bam:${SDK_VERSION}@aar"
+    implementation "com.jumio.android:nv:${SDK_VERSION}@aar"
+    implementation "com.jumio.android:nv-mrz:${SDK_VERSION}@aar"
+    implementation "com.jumio.android:nv-nfc:${SDK_VERSION}@aar"
+    implementation "com.jumio.android:nv-ocr:${SDK_VERSION}@aar"
+    implementation "com.jumio.android:nv-liveness:${SDK_VERSION}@aar"
+    implementation "com.jumio.android:dv:${SDK_VERSION}@aar"
+
+    //for core:
+    implementation "com.android.support:support-v4:27.1.1"
+    implementation "com.android.support:appcompat-v7:27.1.1"
+
+    //for nv:
+    implementation "com.android.support:design:27.1.1"
+    implementation "com.android.support:cardview-v7:27.1.1"
+    implementation "com.google.android.gms:play-services-vision:12.0.0"
+
+    //only for nv-nfc
+    implementation "com.madgag.spongycastle:prov:1.58.0.0"
+    implementation "net.sf.scuba:scuba-sc-android:0.0.16"
+
+    implementation fileTree(dir: 'libs', include: '*.jar')
+
+}   
+
+android {
+	defaultConfig {
+		multiDexEnabled true
+	}
+	dexOptions {
+		jumboMode = true
+	}
+}
+// PLUGIN GRADLE EXTENSIONS END
