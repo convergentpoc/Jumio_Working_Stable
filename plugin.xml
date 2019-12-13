@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-customjumio" version="0.0.1">
+    <name>CustomJumio</name>
+
+    <description>
+        Cordova Plugin based off the Official Jumio Cordova plugin in order to create compatibility for Outsystems
+    </description>
+    <license>MIT</license>
+
+    <keywords>cordova,android,toast,message,alert</keywords>
+    <repo>https://paolo_alcabao@bitbucket.org/projectkai/customjumio.git</repo>
+  
+    <engines>
+        <engine name="cordova" version=">=3.0.0"/>
+    </engines>
+  
+    <js-module src="www/customjumioplugin.js" name="customJumio">
+        <clobbers target="window.plugins.customJumio" />
+    </js-module>
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="CustomJumio">
+                <param name="android-package" value="com.stratpoint.cordova.plugin.CustomJumio"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/CustomJumio.java" target-dir="src/com/stratpoint/cordova/plugin" />
+    </platform>
+</plugin>

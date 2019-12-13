@@ -1,0 +1,31 @@
+{
+  "name": "cordova-plugin-customjumio",
+  "version": "0.0.1",
+  "description": "Cordova Plugin based off the Official Jumio Cordova plugin in order to create compatibility for Outsystems",
+  "cordova": {
+    "id": "cordova-plugin-customjumio",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://paolo_alcabao@bitbucket.org/projectkai/customjumio.git"
+  },
+  "keywords": [
+    "Toast",
+    "Notification",
+    "Message",
+    "Alert",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "Paolo Alcabao <palcabao@stratpoint.com>",
+  "license": "MIT"
+}
