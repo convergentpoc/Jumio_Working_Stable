@@ -20,8 +20,10 @@
         <clobbers target="window.plugins.customJumio" />
     </js-module>
 
-    <!-- Modification -->
-    <dependency id="cordova-plugin-cocoapod-support" />
+    <!-- Modification
+	! Removing due to bad incompatibility with the pods
+     -->
+    <!-- <dependency id="cordova-plugin-cocoapod-support" /> -->
     <!-- Modification End -->
 
     <!-- iOS Platform Modification -->
@@ -39,10 +41,23 @@
             <string>$CAMERA_USAGE_DESCRIPTION</string>
         </config-file>
         
+        <!-- ORIGINAL CONFIGURATION USING THE COCOAPOD SUPPORT PLUGIN
+
         <pods-config ios-min-version="9.0" use-frameworks="true">
             <source url="https://github.com/CocoaPods/Specs.git" />
         </pods-config>
-        <pod name="JumioMobileSDK" version="2.12.0" configurations="release,debug" />
+        <pod name="JumioMobileSDK" version="2.12.0" configurations="release,debug" /> 
+    	-->
+
+    	<podspec>
+    		<config>
+    			<source url="https://github.com/CocoaPods/Specs.git">
+    		</config>
+    		<pods use-frameworks="true">
+    			<pod name="JumioMobileSDK" tag="2.12.0" configurations="release,debug" />
+    		</pods>
+    	</podspec>
+
     </platform>
     <!-- iOS Platform Modification End -->
 
