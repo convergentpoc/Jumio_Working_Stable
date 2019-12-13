@@ -11,12 +11,12 @@ import android.util.Log;
 
 //Jumio Imports
 import com.jumio.MobileSDK;
-import com.jumio.bam.*
+import com.jumio.bam.*;
 import com.jumio.bam.enums.CreditCardType;
 import com.jumio.core.enums.*;
 import com.jumio.core.exceptions.*;
 import com.jumio.dv.DocumentVerificationSDK;
-import com.jumio.nv.*
+import com.jumio.nv.*;
 import com.jumio.nv.data.document.*;
 import com.jumio.sdk.SDKExpiredException;
 //Jumio Imports End
