@@ -12,13 +12,13 @@ CustomJumio.prototype.show = function(message, duration, successCallback, errorC
 
 var exec = require('cordova/exec');
 CustomJumio.prototype.initNetverify = function(token, secret, datacenter, options, customization, successCallback, errorCallback) {
-  var options = {};
-  options.token = token;
-  options.secret = secret;
-  options.datacenter = datacenter;
-  options.options = options;
-  options.customization = customization;
-  cordova.exec(successCallback, errorCallback, 'CustomJumio', 'initNetverify', [options]);
+  var requestOptions = {};
+  requestOptions.token = token;
+  requestOptions.secret = secret;
+  requestOptions.datacenter = datacenter;
+  requestOptions.options = options;
+  requestOptions.customization = customization;
+  cordova.exec(successCallback, errorCallback, 'CustomJumio', 'initNetverify', [requestOptions]);
 }
 
 CustomJumio.prototype.startNetverify = function(success, error) {
