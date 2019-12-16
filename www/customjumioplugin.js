@@ -11,13 +11,15 @@ CustomJumio.prototype.show = function(message, duration, successCallback, errorC
 }
 
 var exec = require('cordova/exec');
-CustomJumio.prototype.initNetverify = function(token, secret, datacenter, options, customization) {
-  exec(function(success) { console.log("Netverify::init Success: " + success) }, 
-   function(error) { console.log("Netverify::init Error: " + error) },
-   "JumioMobileSDK", 
-   "initNetverify", 
-   [token, secret, datacenter, options, customization]);
-};
+CustomJumio.prototype.initNetverify = function(token, secret, datacenter, options, customization, successCallback, errorCallback) {
+  var options = {};
+  options.token = token;
+  options.secret = secret;
+  options.datacenter = datacenter;
+  options.options = options;
+  options.customization = customization;
+  cordova.exec(successCallback, errorCallback, 'CustomJumio', 'initNetverify', [options]);
+}
 
 CustomJumio.prototype.startNetverify = function(success, error) {
   exec(success, error, "JumioMobileSDK", "startNetverify", []);
