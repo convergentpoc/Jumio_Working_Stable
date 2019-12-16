@@ -479,11 +479,11 @@ public class CustomJumio extends CordovaPlugin {
 		}
 
 		if (allGranted) {
-			if (requestCode == JumioMobileSDK.PERMISSION_REQUEST_CODE_BAM) {
+			if (requestCode == CustomJumio.PERMISSION_REQUEST_CODE_BAM) {
 				startSdk(this.bamSDK);
-			} else if (requestCode == JumioMobileSDK.PERMISSION_REQUEST_CODE_NETVERIFY) {
+			} else if (requestCode == CustomJumio.PERMISSION_REQUEST_CODE_NETVERIFY) {
 				startSdk(this.netverifySDK);
-			} else if (requestCode == JumioMobileSDK.PERMISSION_REQUEST_CODE_DOCUMENT_VERIFICATION) {
+			} else if (requestCode == CustomJumio.PERMISSION_REQUEST_CODE_DOCUMENT_VERIFICATION) {
 				startSdk(this.documentVerificationSDK);
 			}
 		} else {
