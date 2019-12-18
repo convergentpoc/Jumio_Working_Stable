@@ -105,12 +105,14 @@ public class CustomJumio extends CordovaPlugin {
 		} else if (action.equals(ACTION_NV_INIT)) {
 			initNetverify(args);
 			result = new PluginResult(Status.NO_RESULT);
+
+			//Testing the plugin context return.
+			callbackContext.sendPluginResult(result);
 			result.setKeepCallback(false);
 			return true;
 		} else if (action.equals(ACTION_NV_START)) {
 			startNetverify(args);
 			result = new PluginResult(Status.NO_RESULT);
-			callbackContext.sendPluginResult(result);
 			result.setKeepCallback(true);
 			return true;
 		} else if (action.equals(ACTION_DV_INIT)) {
