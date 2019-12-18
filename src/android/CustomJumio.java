@@ -266,15 +266,15 @@ public class CustomJumio extends CordovaPlugin {
 			String errorString = "";
 
 			if (data.isNull(0)) {
-				errorString += "Missing apiToken " + data.getString(0) + " ";
+				errorString += "Missing apiToken ";// + data.getString(0) + " ";
 			}
 
 			if (data.isNull(1)) {
-				errorString += "Missing apiSecret " + data.getString(1) + " ";
+				errorString += "Missing apiSecret ";// + data.getString(1) + " ";
 			}
 
 			if (data.isNull(2)) {
-				errorString += "Missing data center " + data.getString(2) + " ";
+				errorString += "Missing data center ";// + data.getString(2) + " ";
 			}
 
 			if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
