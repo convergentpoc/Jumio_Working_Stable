@@ -258,38 +258,29 @@ public class CustomJumio extends CordovaPlugin {
 		}
 
 		try {
-		
-			if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
-				showErrorMessage(data.toString());
+			// Method for Debugging.
+			//if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
+			//	showErrorMessage(data.toString());
+			//}
+			
+			String token;
+			String secret;
+			String dtaCenter;
+			try {
+				JSONObject options = data.getJSONObject(0);
+				token = options.getString("token");
+				secret = options.getString("secret");
+				dtaCenter = options.getString("datacenter");
+			}catch (JSONException e) {
+				callbackContext.error("Error Encountered: " + e.getMessage());
+				return;
 			}
 			
-			// if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
-			// 	showErrorMessage("Missing required parameters apiToken, apiSecret or dataCenter.");
-			// 	return;
-			// }
 
-			//String errorString = "";
-
-			//if (data.isNull(0)) {
-			//	errorString += "Missing apiToken ";// + data.getString(0) + " ";
-			//}
-
-			//if (data.isNull(1)) {
-			//	errorString += "Missing apiSecret ";// + data.getString(1) + " ";
-			//}
-
-			//if (data.isNull(2)) {
-			//	errorString += "Missing data center ";// + data.getString(2) + " ";
-			//}
-
-			//if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
-			//	showErrorMessage(errorString);
-			//	return;
-			//}
-
-			String apiToken = data.getString(0);
-			String apiSecret = data.getString(1);
-			JumioDataCenter dataCenter = (data.getString(2).toLowerCase().equalsIgnoreCase("us")) ? JumioDataCenter.US : JumioDataCenter.EU;
+			String apiToken = token;//data.getString(0);
+			String apiSecret = secret;//data.getString(1);
+			//data.getString(2)
+			JumioDataCenter dataCenter = (dtaCenter.toLowerCase().equalsIgnoreCase("us")) ? JumioDataCenter.US : JumioDataCenter.EU;
 
 			netverifySDK = NetverifySDK.create(cordova.getActivity(), apiToken, apiSecret, dataCenter);
 
