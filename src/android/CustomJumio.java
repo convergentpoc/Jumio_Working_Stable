@@ -280,7 +280,7 @@ public class CustomJumio extends CordovaPlugin {
 
 			//if (data.isNull(2)) {
 			//	errorString += "Missing data center ";// + data.getString(2) + " ";
-			}
+			//}
 
 			//if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
 			//	showErrorMessage(errorString);
