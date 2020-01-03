@@ -35,7 +35,7 @@ CustomJumio.prototype.initNetverify = function(token, secret, datacenter, option
 }
 
 CustomJumio.prototype.startNetverify = function(success, error) {
-  exec(success, error, "JumioMobileSDK", "startNetverify", []);
+  cordova.exec(success, error, "CustomJumio", "startNetverify", []);
 };
 
 CustomJumio.prototype.initBAM = function(token, secret, datacenter, options, customization) {
