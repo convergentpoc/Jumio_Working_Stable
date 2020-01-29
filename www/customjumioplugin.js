@@ -38,6 +38,10 @@ CustomJumio.prototype.startNetverify = function(success, error) {
   cordova.exec(success, error, "CustomJumio", "startNetverify", []);
 };
 
+CustomJumio.prototype.onActivityResult = function(success, error) {
+  cordova.exec(success, error, "CustomJumio", "onActivityResult", []);
+};
+
 CustomJumio.prototype.initBAM = function(token, secret, datacenter, options, customization) {
   exec(function(success) { console.log("BAM::init Success: " + success) }, 
    function(error) { console.log("BAM::init Error: " + error) },
