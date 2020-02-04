@@ -263,7 +263,7 @@ public class CustomJumio extends CordovaPlugin {
 				//ADDED BY KYLE
 	  			String mystring="|";
 	  			JSONObject myoptions = data.getJSONObject(0);
-				JSONArray mykey = options.names ();
+				JSONArray mykey = myoptions.names ();
 					for (int i = 0; i < mykey.length(); ++i) 
 					{
 					   String mykeys = mykey.getString(i); 
