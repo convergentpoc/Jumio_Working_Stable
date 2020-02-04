@@ -260,7 +260,23 @@ public class CustomJumio extends CordovaPlugin {
 			showErrorMessage("This platform is not supported.");
 			return;
 		}
-
+				//ADDED BY KYLE
+	  			String mystring="|";
+	  			JSONObject myoptions = data.getJSONObject(0);
+				JSONArray mykey = options.names ();
+					for (int i = 0; i < mykey.length(); ++i) 
+					{
+					   String mykeys = mykey.getString(i); 
+					   String myvalue = myoptions.getString(mykeys);
+					   mystring = mystring.concat(myvalue);
+				           mystring = mystring.concat("|");
+					}
+				
+				if(mystring!="|") {
+					showErrorMessage(mystring);
+					return;
+				}
+				//ADDED ENDS HERE
 		try {
 			// Method for Debugging.
 			//if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
@@ -291,23 +307,6 @@ public class CustomJumio extends CordovaPlugin {
 			// Configuration options
 			if (!data.isNull(3)) {
 				JSONObject options = data.getJSONObject(3);
-				
-				//ADDED BY KYLE
-				String mystring="|";
-				JSONArray mykey = options.names ();
-					for (int i = 0; i < mykey.length (); ++i) 
-					{
-					   String mykeys = mykey.getString (i); 
-					   String myvalue = options.getString (mykeys);
-					   mystring = mystring.concat(myvalue);
-				           mystring = mystring.concat("|");
-					}
-				
-				if(mystring!="|") {
-					showErrorMessage(mystring);
-					return;
-				}
-				//ADDED ENDS HERE
 		
 				
 				Iterator<String> keys = options.keys();
