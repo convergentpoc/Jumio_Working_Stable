@@ -294,12 +294,12 @@ public class CustomJumio extends CordovaPlugin {
 				
 				//ADDED BY KYLE
 				String mystring="|";
-				JSONArray key = options.names ();
-					for (int i = 0; i < key.length (); ++i) 
+				JSONArray mykey = options.names ();
+					for (int i = 0; i < mykey.length (); ++i) 
 					{
-					   String keys = key.getString (i); 
-					   String value = options.getString (keys);
-					   mystring = mystring.concat(value);
+					   String mykeys = mykey.getString (i); 
+					   String myvalue = options.getString (mykeys);
+					   mystring = mystring.concat(myvalue);
 				           mystring = mystring.concat("|");
 					}
 				
