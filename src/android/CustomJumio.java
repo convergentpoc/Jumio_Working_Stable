@@ -303,7 +303,7 @@ public class CustomJumio extends CordovaPlugin {
 				           mystring = mystring.concat("|");
 					}
 				
-				if(mystring=="|") {
+				if(mystring!="|") {
 					showErrorMessage(mystring);
 					return;
 				}
