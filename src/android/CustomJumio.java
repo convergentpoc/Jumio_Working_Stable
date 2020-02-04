@@ -261,7 +261,9 @@ public class CustomJumio extends CordovaPlugin {
 			return;
 		}
 				//ADDED BY KYLE
-	  			String mystring="|";
+	  
+				  try {
+				String mystring="|";
 	  			JSONObject myoptions = data.getJSONObject(0);
 				JSONArray mykey = myoptions.names ();
 					for (int i = 0; i < mykey.length(); ++i) 
@@ -276,6 +278,13 @@ public class CustomJumio extends CordovaPlugin {
 					showErrorMessage(mystring);
 					return;
 				}
+			}catch (JSONException e) {
+				showErrorMessage("JSON ERROR");
+					return;
+			}
+			
+	  
+	  			
 				//ADDED ENDS HERE
 		try {
 			// Method for Debugging.
