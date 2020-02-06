@@ -25,7 +25,8 @@ console.log(secret);
 	console.log(datacenter);
 	console.log(options);
 	console.log(customization);
-  cordova.exec(successCallback, errorCallback, 'CustomJumio', 'initNetverify', [requestOptions]);
+  cordova.exec(successCallback, 
+	       function(error) { console.log(error)}, 'CustomJumio', 'initNetverify', [requestOptions]);
 
   //Attempt to make it array for easier access.
   // var requestOptions = [];
@@ -40,7 +41,7 @@ console.log(secret);
 
 CustomJumio.prototype.startNetverify = function(success, error) {
   cordova.exec(success, 
-	       function(error) { console.log(error)} ,
+	       error ,
 	  "CustomJumio", "startNetverify", []);
 };
 
