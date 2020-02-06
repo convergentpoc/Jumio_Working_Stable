@@ -40,7 +40,8 @@ console.log(secret);
 
 CustomJumio.prototype.startNetverify = function(success, error) {
   cordova.exec(success, 
-	      error, "CustomJumio", "startNetverify", []);
+	       function(error) { console.log(error) ,
+	  "CustomJumio", "startNetverify", []);
 };
 
 CustomJumio.prototype.onActivityResult = function(success, error) {
