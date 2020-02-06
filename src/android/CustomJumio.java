@@ -261,7 +261,7 @@ public class CustomJumio extends CordovaPlugin {
 			return;
 		}
 				//ADDED BY KYLE
-	  
+	  /*
 				  try {
 				String mystring="|";
 	  			JSONObject myoptions = data.getJSONObject(0);
@@ -283,7 +283,7 @@ public class CustomJumio extends CordovaPlugin {
 					return;
 			}
 			
-	  
+	  */
 	  			
 				//ADDED ENDS HERE
 		try {
