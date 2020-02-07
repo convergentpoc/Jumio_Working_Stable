@@ -313,7 +313,7 @@ public class CustomJumio extends CordovaPlugin {
 
 			netverifySDK = NetverifySDK.create(cordova.getActivity(), apiToken, apiSecret, dataCenter);
 	  		//added ni kyle
-			netverifySDK.setEnableEMRTD(true);
+			//netverifySDK.setEnableEMRTD(true);
 
 			// Configuration options
 			if (!data.isNull(3)) {
