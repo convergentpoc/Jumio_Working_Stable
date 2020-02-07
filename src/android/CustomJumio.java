@@ -284,7 +284,7 @@ public class CustomJumio extends CordovaPlugin {
 			}
 			
 	  */
-	  			
+
 				//ADDED ENDS HERE
 		try {
 			// Method for Debugging.
@@ -312,6 +312,8 @@ public class CustomJumio extends CordovaPlugin {
 			JumioDataCenter dataCenter = (dtaCenter.toLowerCase().equalsIgnoreCase("us")) ? JumioDataCenter.US : JumioDataCenter.EU;
 
 			netverifySDK = NetverifySDK.create(cordova.getActivity(), apiToken, apiSecret, dataCenter);
+	  		//added ni kyle
+			netverifySDK.setEnableEMRTD(true);
 
 			// Configuration options
 			if (!data.isNull(3)) {
