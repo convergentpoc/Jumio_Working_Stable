@@ -46,7 +46,8 @@ CustomJumio.prototype.startNetverify = function(success, error) {
 };
 
 CustomJumio.prototype.onActivityResult = function(success, error) {
-  cordova.exec(success, 
+  cordova.exec(
+	  function(success) { console.log(success), 
 	       function(error) { console.log(error)},
 	       "CustomJumio", "onActivityResult", []);
 };
