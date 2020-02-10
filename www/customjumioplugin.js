@@ -25,8 +25,8 @@ console.log(secret);
 	console.log(datacenter);
 	console.log(options);
 	console.log(customization);
-  cordova.exec(successCallback, 
-	       function(error) { console.log(error)}, 'CustomJumio', 'initNetverify', [requestOptions]);
+	
+  cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'initNetverify', [requestOptions]);
 
   //Attempt to make it array for easier access.
   // var requestOptions = [];
@@ -41,17 +41,20 @@ console.log(secret);
 
 CustomJumio.prototype.startNetverify = function(success, error) {
   cordova.exec(success, 
-	       function(error) { console.log(error)} ,
+	      error ,
 	  "CustomJumio", "startNetverify", []);
 };
 
 CustomJumio.prototype.onActivityResult = function(success, error) {
   cordova.exec(
-	  function(success) { console.log(success), 
-	       function(error) { console.log(error)},
+	 success, 
+	       error,
 	       "CustomJumio", "onActivityResult", []);
 };
 
+
+
+//DI PA TO NEED AHEHE
 CustomJumio.prototype.initBAM = function(token, secret, datacenter, options, customization) {
   exec(function(success) { console.log("BAM::init Success: " + success) }, 
    function(error) { console.log("BAM::init Error: " + error) },
