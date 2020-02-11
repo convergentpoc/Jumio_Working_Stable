@@ -300,6 +300,10 @@ public class CustomJumio extends CordovaPlugin {
 					String key = keys.next();
 
 					if (key.equalsIgnoreCase("requireVerification")) {
+						if(true) {
+					showErrorMessage("requireVerification true");
+					return;
+						}
 						netverifySDK.setRequireVerification(options.getBoolean(key));
 					} else if (key.equalsIgnoreCase("callbackUrl")) {
 						netverifySDK.setCallbackUrl(options.getString(key));
@@ -348,6 +352,7 @@ public class CustomJumio extends CordovaPlugin {
 							}
 						}
 									//ADDED BY KYLE
+						/*
 	  
 				  try {
 						String mystring="|";
@@ -370,7 +375,7 @@ public class CustomJumio extends CordovaPlugin {
 					return;
 			}
 			
-	  
+	  */
 
 				//ADDED ENDS HERE
 						netverifySDK.setPreselectedDocumentTypes(documentTypes);
