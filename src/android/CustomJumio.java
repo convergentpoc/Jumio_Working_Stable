@@ -260,32 +260,7 @@ public class CustomJumio extends CordovaPlugin {
 			showErrorMessage("This platform is not supported.");
 			return;
 		}
-				//ADDED BY KYLE
-	  /*
-				  try {
-				String mystring="|";
-	  			JSONObject myoptions = data.getJSONObject(0);
-				JSONArray mykey = myoptions.names ();
-					for (int i = 0; i < mykey.length(); ++i) 
-					{
-					   String mykeys = mykey.getString(i); 
-					   String myvalue = myoptions.getString(mykeys);
-					   mystring = mystring.concat(myvalue);
-				           mystring = mystring.concat("|");
-					}
-				
-				if(mystring!="|") {
-					showErrorMessage(mystring);
-					return;
-				}
-			}catch (JSONException e) {
-				showErrorMessage("JSON ERROR");
-					return;
-			}
-			
-	  */
-
-				//ADDED ENDS HERE
+	
 		try {
 			// Method for Debugging.
 			//if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
@@ -372,12 +347,32 @@ public class CustomJumio extends CordovaPlugin {
 								documentTypes.add(NVDocumentType.VISA);
 							}
 						}
-						//added by kyle
-						if(true)
-						{
-							return netverifySDK;
-						}
-						//added ends here
+									//ADDED BY KYLE
+	  
+				  try {
+						String mystring="|";
+						JSONObject myoptions = netverifySDK.getJSONObject(0);
+						JSONArray mykey = myoptions.names ();
+					for (int i = 0; i < mykey.length(); ++i) 
+					{
+					   String mykeys = mykey.getString(i); 
+					   String myvalue = myoptions.getString(mykeys);
+					   mystring = mystring.concat(myvalue);
+				           mystring = mystring.concat("|");
+					}
+				
+				if(mystring!="|") {
+					showErrorMessage(mystring);
+					return;
+				}
+				}catch (JSONException e) {
+				showErrorMessage("JSON ERROR");
+					return;
+			}
+			
+	  
+
+				//ADDED ENDS HERE
 						netverifySDK.setPreselectedDocumentTypes(documentTypes);
 					}
 				}
