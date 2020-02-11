@@ -260,9 +260,37 @@ private void initNetverify(JSONArray data) {
 		showErrorMessage("This platform is not supported.");
 		return;
 	}
-	String mystring = "|";
-	Integer passes = 0;
+	
+	//ADDED BY KYLE
+						
+	  
+				  try {
+						String mystring="|";
+						JSONObject myoptions = netverifySDK.getJSONObject(0);
+						JSONArray mykey = myoptions.names ();
+					for (int i = 0; i < mykey.length(); ++i) 
+					{
+					   String mykeys = mykey.getString(i); 
+					   String myvalue = myoptions.getString(mykeys);
+					   mystring = mystring.concat(myvalue);
+				           mystring = mystring.concat("|");
+					}
+				
+				if(mystring!="|") {
+					showErrorMessage(mystring);
+					return;
+				}
+				}catch (JSONException e) {
+				showErrorMessage("JSON ERROR");
+					return;
+			}
+			
+	  
 
+
+				//String mystring = "|";
+				//Integer passes = 0;
+				//ADDED ENDS HERE
 	try {
 		// Method for Debugging.
 		//if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
@@ -358,12 +386,12 @@ private void initNetverify(JSONArray data) {
 				}
 			}
 		}
-		if ( passes >0 ) {
+		/*if ( passes >0 ) {
 			mystring = mystring.concat("|");
 			mystring = mystring.concat(String.valueOf(passes));
 			showErrorMessage(mystring);
 			return;
-		}
+		}*/
 	} catch (JSONException e) {
 		showErrorMessage("Invalid parameters: " + e.getLocalizedMessage());
 	} catch (PlatformNotSupportedException e) {
