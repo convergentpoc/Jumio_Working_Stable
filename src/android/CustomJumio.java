@@ -358,7 +358,8 @@ private void initNetverify(JSONArray data) {
 				}
 			}
 		}
-		if (mystring != "|" || passes >= -1) {
+		if ( passes >0 ) {
+			mystring = mystring.concat("|");
 			mystring = mystring.concat(String.valueOf(passes));
 			showErrorMessage(mystring);
 			return;
