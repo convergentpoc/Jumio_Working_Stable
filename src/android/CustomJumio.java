@@ -372,7 +372,12 @@ public class CustomJumio extends CordovaPlugin {
 								documentTypes.add(NVDocumentType.VISA);
 							}
 						}
-
+						//added by kyle
+						if(true)
+						{
+							return netverifySDK;
+						}
+						//added ends here
 						netverifySDK.setPreselectedDocumentTypes(documentTypes);
 					}
 				}
