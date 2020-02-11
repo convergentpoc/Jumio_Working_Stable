@@ -266,7 +266,7 @@ public class CustomJumio extends CordovaPlugin {
 			//if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
 			//	showErrorMessage(data.toString());
 			//}
-			
+			String mystring="|";
 			String token;
 			String secret;
 			String dtaCenter;
@@ -300,16 +300,18 @@ public class CustomJumio extends CordovaPlugin {
 					String key = keys.next();
 
 					if (key.equalsIgnoreCase("requireVerification")) {
-						if(true) {
-					showErrorMessage("requireVerification true");
-					return;
-						}
+						mystring = mystring.concat("requireVerification");
+						mystring = mystring.concat("|");
 						netverifySDK.setRequireVerification(options.getBoolean(key));
 					} else if (key.equalsIgnoreCase("callbackUrl")) {
 						netverifySDK.setCallbackUrl(options.getString(key));
 					} else if (key.equalsIgnoreCase("requireFaceMatch")) {
+						mystring = mystring.concat("requireFaceMatch");
+						mystring = mystring.concat("|");
 						netverifySDK.setRequireFaceMatch(options.getBoolean(key));
 					} else if (key.equalsIgnoreCase("preselectedCountry")) {
+						mystring = mystring.concat("preselectedCountry");
+						mystring = mystring.concat("|");
 						netverifySDK.setPreselectedCountry(options.getString(key));
 					} else if (key.equalsIgnoreCase("merchantScanReference")) {
 						netverifySDK.setMerchantScanReference(options.getString(key));
@@ -378,6 +380,10 @@ public class CustomJumio extends CordovaPlugin {
 	  */
 
 				//ADDED ENDS HERE
+						
+				if(mystring!="|") {
+					showErrorMessage(mystring);
+					return;}
 						netverifySDK.setPreselectedDocumentTypes(documentTypes);
 					}
 				}
