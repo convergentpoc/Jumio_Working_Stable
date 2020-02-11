@@ -255,121 +255,120 @@ public class CustomJumio extends CordovaPlugin {
 		this.cordova.getActivity().runOnUiThread(runnable);
 	}
 
-  private void initNetverify(JSONArray data) {
-		if (!NetverifySDK.isSupportedPlatform(cordova.getActivity())) {
-			showErrorMessage("This platform is not supported.");
+private void initNetverify(JSONArray data) {
+	if (!NetverifySDK.isSupportedPlatform(cordova.getActivity())) {
+		showErrorMessage("This platform is not supported.");
+		return;
+	}
+	String mystring = "|";
+	Integer passes = 0;
+
+	try {
+		// Method for Debugging.
+		//if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
+		//	showErrorMessage(data.toString());
+		//}
+		String token;
+		String secret;
+		String dtaCenter;
+		try {
+			JSONObject options = data.getJSONObject(0);
+			token = options.getString("token");
+			secret = options.getString("secret");
+			dtaCenter = options.getString("datacenter");
+		} catch (JSONException e) {
+			callbackContext.error("Error Encountered: " + e.getMessage());
 			return;
 		}
-				String mystring="|";
-	  			Integer passes = 0;
 
-		try {
-			// Method for Debugging.
-			//if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
-			//	showErrorMessage(data.toString());
-			//}
-			String token;
-			String secret;
-			String dtaCenter;
-			try {
-				JSONObject options = data.getJSONObject(0);
-				token = options.getString("token");
-				secret = options.getString("secret");
-				dtaCenter = options.getString("datacenter");
-			}catch (JSONException e) {
-				callbackContext.error("Error Encountered: " + e.getMessage());
-				return;
-			}
-			
 
-			String apiToken = token;//data.getString(0);
-			String apiSecret = secret;//data.getString(1);
-			//data.getString(2)
-			JumioDataCenter dataCenter = (dtaCenter.toLowerCase().equalsIgnoreCase("us")) ? JumioDataCenter.US : JumioDataCenter.EU;
+		String apiToken = token; //data.getString(0);
+		String apiSecret = secret; //data.getString(1);
+		//data.getString(2)
+		JumioDataCenter dataCenter = (dtaCenter.toLowerCase().equalsIgnoreCase("us")) ? JumioDataCenter.US : JumioDataCenter.EU;
 
-			netverifySDK = NetverifySDK.create(cordova.getActivity(), apiToken, apiSecret, dataCenter);
-	  		
+		netverifySDK = NetverifySDK.create(cordova.getActivity(), apiToken, apiSecret, dataCenter);
 
-			// Configuration options
-			if (!data.isNull(3)) {
-				JSONObject options = data.getJSONObject(3);
-		
-				
-				Iterator<String> keys = options.keys();
-				while (keys.hasNext()) {
-					String key = keys.next();
-					passes++;
-					if (key.equalsIgnoreCase("requireVerification")) {
-						mystring = mystring.concat("requireVerification");
-						mystring = mystring.concat("|");
-						netverifySDK.setRequireVerification(options.getBoolean(key));
-					} else if (key.equalsIgnoreCase("callbackUrl")) {
-						netverifySDK.setCallbackUrl(options.getString(key));
-					} else if (key.equalsIgnoreCase("requireFaceMatch")) {
-						mystring = mystring.concat("requireFaceMatch");
-						mystring = mystring.concat("|");
-						netverifySDK.setRequireFaceMatch(options.getBoolean(key));
-					} else if (key.equalsIgnoreCase("preselectedCountry")) {
-						mystring = mystring.concat("preselectedCountry");
-						mystring = mystring.concat("|");
-						netverifySDK.setPreselectedCountry(options.getString(key));
-					} else if (key.equalsIgnoreCase("merchantScanReference")) {
-						netverifySDK.setMerchantScanReference(options.getString(key));
-					} else if (key.equalsIgnoreCase("merchantReportingCriteria")) {
-						netverifySDK.setMerchantReportingCriteria(options.getString(key));
-					} else if (key.equalsIgnoreCase("customerID")) {
-						netverifySDK.setCustomerId(options.getString(key));
-					} else if (key.equalsIgnoreCase("enableEpassport")) {
-						netverifySDK.setEnableEMRTD(options.getBoolean(key));
-					} else if (key.equalsIgnoreCase("sendDebugInfoToJumio")) {
-						netverifySDK.sendDebugInfoToJumio(options.getBoolean(key));
-					} else if (key.equalsIgnoreCase("dataExtractionOnMobileOnly")) {
-						netverifySDK.setDataExtractionOnMobileOnly(options.getBoolean(key));
-					} else if (key.equalsIgnoreCase("cameraPosition")) {
-						JumioCameraPosition cameraPosition = (options.getString(key).toLowerCase().equals("front")) ? JumioCameraPosition.FRONT : JumioCameraPosition.BACK;
-						netverifySDK.setCameraPosition(cameraPosition);
-					} else if (key.equalsIgnoreCase("preselectedDocumentVariant")) {
-						NVDocumentVariant variant = (options.getString(key).toLowerCase().equals("paper")) ? NVDocumentVariant.PAPER : NVDocumentVariant.PLASTIC;
-						netverifySDK.setPreselectedDocumentVariant(variant);
-					} else if (key.equalsIgnoreCase("documentTypes")) {
-						JSONArray jsonTypes = options.getJSONArray(key);
-						ArrayList<String> types = new ArrayList<String>();
-						if (jsonTypes != null) {
-							int len = jsonTypes.length();
-							for (int i = 0; i < len; i++) {
-								types.add(jsonTypes.get(i).toString());
-							}
+
+		// Configuration options
+		if (!data.isNull(3)) {
+			JSONObject options = data.getJSONObject(3);
+
+
+			Iterator < String > keys = options.keys();
+			while (keys.hasNext()) {
+				String key = keys.next();
+				passes++;
+				if (key.equalsIgnoreCase("requireVerification")) {
+					mystring = mystring.concat("requireVerification");
+					mystring = mystring.concat("|");
+					netverifySDK.setRequireVerification(options.getBoolean(key));
+				} else if (key.equalsIgnoreCase("callbackUrl")) {
+					netverifySDK.setCallbackUrl(options.getString(key));
+				} else if (key.equalsIgnoreCase("requireFaceMatch")) {
+					mystring = mystring.concat("requireFaceMatch");
+					mystring = mystring.concat("|");
+					netverifySDK.setRequireFaceMatch(options.getBoolean(key));
+				} else if (key.equalsIgnoreCase("preselectedCountry")) {
+					mystring = mystring.concat("preselectedCountry");
+					mystring = mystring.concat("|");
+					netverifySDK.setPreselectedCountry(options.getString(key));
+				} else if (key.equalsIgnoreCase("merchantScanReference")) {
+					netverifySDK.setMerchantScanReference(options.getString(key));
+				} else if (key.equalsIgnoreCase("merchantReportingCriteria")) {
+					netverifySDK.setMerchantReportingCriteria(options.getString(key));
+				} else if (key.equalsIgnoreCase("customerID")) {
+					netverifySDK.setCustomerId(options.getString(key));
+				} else if (key.equalsIgnoreCase("enableEpassport")) {
+					netverifySDK.setEnableEMRTD(options.getBoolean(key));
+				} else if (key.equalsIgnoreCase("sendDebugInfoToJumio")) {
+					netverifySDK.sendDebugInfoToJumio(options.getBoolean(key));
+				} else if (key.equalsIgnoreCase("dataExtractionOnMobileOnly")) {
+					netverifySDK.setDataExtractionOnMobileOnly(options.getBoolean(key));
+				} else if (key.equalsIgnoreCase("cameraPosition")) {
+					JumioCameraPosition cameraPosition = (options.getString(key).toLowerCase().equals("front")) ? JumioCameraPosition.FRONT : JumioCameraPosition.BACK;
+					netverifySDK.setCameraPosition(cameraPosition);
+				} else if (key.equalsIgnoreCase("preselectedDocumentVariant")) {
+					NVDocumentVariant variant = (options.getString(key).toLowerCase().equals("paper")) ? NVDocumentVariant.PAPER : NVDocumentVariant.PLASTIC;
+					netverifySDK.setPreselectedDocumentVariant(variant);
+				} else if (key.equalsIgnoreCase("documentTypes")) {
+					JSONArray jsonTypes = options.getJSONArray(key);
+					ArrayList < String > types = new ArrayList < String > ();
+					if (jsonTypes != null) {
+						int len = jsonTypes.length();
+						for (int i = 0; i < len; i++) {
+							types.add(jsonTypes.get(i).toString());
 						}
-
-						ArrayList<NVDocumentType> documentTypes = new ArrayList<NVDocumentType>();
-						for (String type : types) {
-							if (type.toLowerCase().equals("passport")) {
-								documentTypes.add(NVDocumentType.PASSPORT);
-							} else if (type.toLowerCase().equals("driver_license")) {
-								documentTypes.add(NVDocumentType.DRIVER_LICENSE);
-							} else if (type.toLowerCase().equals("identity_card")) {
-								documentTypes.add(NVDocumentType.IDENTITY_CARD);
-							} else if (type.toLowerCase().equals("visa")) {
-								documentTypes.add(NVDocumentType.VISA);
-							}
-						}
-									
-				if(mystring!="|" || passes>=-1) 
-				{
-					mystring = mystring.concat(String.valueOf(passes));
-					showErrorMessage(mystring);
-					return;
-				}
-						netverifySDK.setPreselectedDocumentTypes(documentTypes);
 					}
+
+					ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
+					for (String type: types) {
+						if (type.toLowerCase().equals("passport")) {
+							documentTypes.add(NVDocumentType.PASSPORT);
+						} else if (type.toLowerCase().equals("driver_license")) {
+							documentTypes.add(NVDocumentType.DRIVER_LICENSE);
+						} else if (type.toLowerCase().equals("identity_card")) {
+							documentTypes.add(NVDocumentType.IDENTITY_CARD);
+						} else if (type.toLowerCase().equals("visa")) {
+							documentTypes.add(NVDocumentType.VISA);
+						}
+					}
+
+					netverifySDK.setPreselectedDocumentTypes(documentTypes);
 				}
 			}
-		} catch (JSONException e) {
-			showErrorMessage("Invalid parameters: " + e.getLocalizedMessage());
-		} catch (PlatformNotSupportedException e) {
-			showErrorMessage("Error initializing the Netverify SDK: " + e.getLocalizedMessage());
 		}
+		if (mystring != "|" || passes >= -1) {
+			mystring = mystring.concat(String.valueOf(passes));
+			showErrorMessage(mystring);
+			return;
+		}
+	} catch (JSONException e) {
+		showErrorMessage("Invalid parameters: " + e.getLocalizedMessage());
+	} catch (PlatformNotSupportedException e) {
+		showErrorMessage("Error initializing the Netverify SDK: " + e.getLocalizedMessage());
 	}
+}
 
   private void startNetverify(JSONArray data) {
 		if (netverifySDK == null) {
