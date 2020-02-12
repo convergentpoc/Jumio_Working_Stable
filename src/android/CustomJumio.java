@@ -322,7 +322,6 @@ private void initNetverify(JSONArray data) {
 		// Configuration options
 		if (!data.isNull(0)) {
 			JSONObject options = data.getJSONObject(0);
-			options = options.get
 
 			Iterator < String > keys = options.keys();
 			while (keys.hasNext()) {
