@@ -317,7 +317,7 @@ private void initNetverify(JSONArray data) {
 
 		netverifySDK = NetverifySDK.create(cordova.getActivity(), apiToken, apiSecret, dataCenter);
 	
-		if ( passes >0 ) {
+		if ( passes =0 ) {
 			mystring = mystring.concat("|");
 			mystring = mystring.concat(String.valueOf(passes));
 			callbackContext.error(mystring);
