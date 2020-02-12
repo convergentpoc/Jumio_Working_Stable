@@ -261,7 +261,9 @@ private void initNetverify(JSONArray data) {
 		return;
 	}
 	
-			//ADDED BY KYLE		
+			//ADDED BY KYLE	
+	//Start WORKING DEBUGGER
+	/*
 			try {
 				String mystring="|";
 				JSONObject myoptions = data.getJSONObject(1);
@@ -286,9 +288,11 @@ private void initNetverify(JSONArray data) {
 
 			String mystring = "|";
 			Integer passes = 0;
-			//ADDED ENDS HERE
+	*/
+	//END OF WORKING DEBUGGER
+	//ADDED ENDS HERE
 	try {
-	
+
 		String token;
 		String secret;
 		String dtaCenter;
@@ -302,20 +306,46 @@ private void initNetverify(JSONArray data) {
 			return;
 		}
 
-
 		String apiToken = token; 
 		String apiSecret = secret; 
 		JumioDataCenter dataCenter = (dtaCenter.toLowerCase().equalsIgnoreCase("us")) ? JumioDataCenter.US : JumioDataCenter.EU;
-
 		netverifySDK = NetverifySDK.create(cordova.getActivity(), apiToken, apiSecret, dataCenter);
-	
+
+		//Start of Now working iteration counter
+		/*
 		if ( passes ==0 ) {
 			mystring = mystring.concat("|");
 			mystring = mystring.concat(String.valueOf(passes));
 			callbackContext.error(mystring);
 			return;
 		}
-
+		*/
+		//End of Not working iteration counter
+		//Start of Kyle's Implementation of setting up the netverify SDK
+		try {
+		
+			JSONObject options1 = data.getJSONObject(0);
+			String mystring="|";
+			JSONObject optionsproper = options.getJSONObject("options");
+			JSONArray mykey = optionsproper.names();
+			for (int i = 0; i < mykey.length(); ++i) 
+			{
+			   String mykeys = mykey.getString(i); 
+			   String myvalue = optionsproper.getString(mykeys);
+			   mystring = mystring.concat(optionsproper.names(i)+":"+myvalue);
+			   mystring = mystring.concat("|");
+			}
+			if(mystring!="|"){
+				showErrorMessage(mystring);
+				return;
+			}
+			
+		 } catch (JSONException e) {
+				showErrorMessage("KYLE'S IMPLEMENTATION ERROR");
+				return;
+			}
+		//End of Kyle's Implementation of setting up the netverify SDK (Has its own Try catch)
+		
 		// Configuration options
 		if (!data.isNull(0)) {
 			JSONObject options = data.getJSONObject(0);
