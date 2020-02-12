@@ -294,11 +294,11 @@ private void initNetverify(JSONArray data) {
 			mystring = mystring.concat(String.valueOf(passes));
 			callbackContext.error(mystring);
 			return;
-		
+		}
 		//End of Not working iteration counter
 	*/	//END OF ADDED BY KYLE
 	
-		}	
+			
 		try {
 
 		String token;
