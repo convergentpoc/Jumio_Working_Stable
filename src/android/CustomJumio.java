@@ -262,36 +262,33 @@ private void initNetverify(JSONArray data) {
 	}
 	
 			//ADDED BY KYLE		
-				  try {
+			try {
 				String mystring="|";
-	  			JSONObject myoptions = data.getJSONObject(1);
+				JSONObject myoptions = data.getJSONObject(1);
 				JSONArray mykey = myoptions.names ();
-					for (int i = 0; i < mykey.length(); ++i) 
-					{
-					   String mykeys = mykey.getString(i); 
-					   String myvalue = myoptions.getString(mykeys);
-					   mystring = mystring.concat(myvalue);
-				           mystring = mystring.concat("|");
-					}
-				
+
+				for (int i = 0; i < mykey.length(); ++i){
+				   String mykeys = mykey.getString(i); 
+				   String myvalue = myoptions.getString(mykeys);
+				   mystring = mystring.concat(myvalue);
+				   mystring = mystring.concat("|");
+				}
+
 				if(mystring!="|") {
 					showErrorMessage(mystring);
 					return;
 				}
+					  
 			}catch (JSONException e) {
 				showErrorMessage("JSON ERROR");
-					return;
-			}
+				return;}
 
 
-				String mystring = "|";
-				Integer passes = 0;
+			String mystring = "|";
+			Integer passes = 0;
 			//ADDED ENDS HERE
 	try {
-		// Method for Debugging.
-		//if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
-		//	showErrorMessage(data.toString());
-		//}
+	
 		String token;
 		String secret;
 		String dtaCenter;
@@ -306,9 +303,8 @@ private void initNetverify(JSONArray data) {
 		}
 
 
-		String apiToken = token; //data.getString(0);
-		String apiSecret = secret; //data.getString(1);
-		//data.getString(2)
+		String apiToken = token; 
+		String apiSecret = secret; 
 		JumioDataCenter dataCenter = (dtaCenter.toLowerCase().equalsIgnoreCase("us")) ? JumioDataCenter.US : JumioDataCenter.EU;
 
 		netverifySDK = NetverifySDK.create(cordova.getActivity(), apiToken, apiSecret, dataCenter);
@@ -323,25 +319,16 @@ private void initNetverify(JSONArray data) {
 		// Configuration options
 		if (!data.isNull(0)) {
 			JSONObject options = data.getJSONObject(0);
-
-
 			Iterator < String > keys = options.keys();
 			while (keys.hasNext()) {
 				String key = keys.next();
-				passes++;
 				if (key.equalsIgnoreCase("requireVerification")) {
-					mystring = mystring.concat("requireVerification");
-					mystring = mystring.concat("|");
 					netverifySDK.setRequireVerification(options.getBoolean(key));
 				} else if (key.equalsIgnoreCase("callbackUrl")) {
 					netverifySDK.setCallbackUrl(options.getString(key));
 				} else if (key.equalsIgnoreCase("requireFaceMatch")) {
-					mystring = mystring.concat("requireFaceMatch");
-					mystring = mystring.concat("|");
 					netverifySDK.setRequireFaceMatch(options.getBoolean(key));
 				} else if (key.equalsIgnoreCase("preselectedCountry")) {
-					mystring = mystring.concat("preselectedCountry");
-					mystring = mystring.concat("|");
 					netverifySDK.setPreselectedCountry(options.getString(key));
 				} else if (key.equalsIgnoreCase("merchantScanReference")) {
 					netverifySDK.setMerchantScanReference(options.getString(key));
