@@ -260,43 +260,46 @@ private void initNetverify(JSONArray data) {
 		showErrorMessage("This platform is not supported.");
 		return;
 	}
-	
-			//ADDED BY KYLE		
-				  try {
-				String mystring="|";
-	  			JSONObject myoptions = data.getJSONObject(0);
-				JSONArray mykey = myoptions.names ();
-					for (int i = 0; i < mykey.length(); ++i) 
-					{
-					   String mykeys = mykey.getString(i); 
-					   String myvalue = myoptions.getString(mykeys);
-					   mystring = mystring.concat(myvalue);
-				           mystring = mystring.concat("|");
-					}
-				
-				if(mystring!="|") {
-					showErrorMessage(mystring);
-					return;
-				}
-			}catch (JSONException e) {
-				showErrorMessage("JSON ERROR");
-					return;
-			}
+	/*  //ADDED BY KYLE	
 
- 			
-	/*
-				String mystring = "|";
-				Integer passes = 0;
-			if ( passes ==0 ) {
+		//Start WORKING DEBUGGER
+			  try {
+			String mystring="|";
+			JSONObject myoptions = data.getJSONObject(0);
+			JSONArray mykey = myoptions.names ();
+				for (int i = 0; i < mykey.length(); ++i) 
+				{
+				   String mykeys = mykey.getString(i); 
+				   String myvalue = myoptions.getString(mykeys);
+				   mystring = mystring.concat(myvalue);
+				   mystring = mystring.concat("|");
+				}
+
+			if(mystring!="|") {
+				showErrorMessage(mystring);
+				return;
+			}
+		}catch (JSONException e) {
+			showErrorMessage("JSON ERROR");
+				return;
+		}
+
+		//END OF WORKING DEBUGGER
+		//Start of Not working iteration counter
+		String mystring = "|";
+		Integer passes = 0;
+
+		if ( passes ==0 ) {
 			mystring = mystring.concat("|");
 			mystring = mystring.concat(String.valueOf(passes));
 			callbackContext.error(mystring);
 			return;
-			*/
 		}
+		//End of Not working iteration counter
 
-			//ADDED ENDS HERE
-	try {
+	*/	//END OF ADDED BY KYLE
+			
+		try {
 
 		String token;
 		String secret;
@@ -317,7 +320,41 @@ private void initNetverify(JSONArray data) {
 		JumioDataCenter dataCenter = (dtaCenter.toLowerCase().equalsIgnoreCase("us")) ? JumioDataCenter.US : JumioDataCenter.EU;
 
 		netverifySDK = NetverifySDK.create(cordova.getActivity(), apiToken, apiSecret, dataCenter);
-	
+		//Kyle Implementation for setting up of the netverify SDK
+		
+		try {
+			JSONObject options1 = data.getJSONObject(0);
+			
+		
+			String mystring="|";
+	  		//JSONObject myoptions = data.getJSONObject(0);
+			
+			JSONObject optionsproper = options.getJSONObject("options");
+			JSONArray mykey = optionsproper.names();
+			for (int i = 0; i < mykey.length(); ++i) 
+			{
+			   String mykeys = mykey.getString(i); 
+			   String myvalue = optionsproper.getString(mykeys);
+			   mystring = mystring.concat(optionsproper.names(i)+":"+myvalue);
+			   mystring = mystring.concat("|");
+			}
+
+			if(mystring!="|"){
+				showErrorMessage(mystring);
+				return;
+			}
+			}catch (JSONException e) {
+				showErrorMessage("JSON ERROR");
+				return;
+			}
+			
+		} catch (JSONException e) {
+			callbackContext.error("Error Encountered: " + e.getMessage());
+			return;
+		}
+
+		
+		
 
 		// Configuration options
 		if (!data.isNull(0)) {
