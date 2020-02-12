@@ -264,7 +264,7 @@ private void initNetverify(JSONArray data) {
 			//ADDED BY KYLE		
 				  try {
 				String mystring="|";
-	  			JSONObject myoptions = data.getJSONObject(0);
+	  			JSONObject myoptions = data.getJSONObject(1);
 				JSONArray mykey = myoptions.names ();
 					for (int i = 0; i < mykey.length(); ++i) 
 					{
