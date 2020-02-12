@@ -261,13 +261,11 @@ private void initNetverify(JSONArray data) {
 		return;
 	}
 	
-	//ADDED BY KYLE
-				/*		
-	  
+			//ADDED BY KYLE		
 				  try {
-						String mystring="|";
-						JSONObject myoptions = netverifySDK.getJSONObject(0);
-						JSONArray mykey = myoptions.names ();
+				String mystring="|";
+	  			JSONObject myoptions = data.getJSONObject(0);
+				JSONArray mykey = myoptions.names ();
 					for (int i = 0; i < mykey.length(); ++i) 
 					{
 					   String mykeys = mykey.getString(i); 
@@ -280,17 +278,15 @@ private void initNetverify(JSONArray data) {
 					showErrorMessage(mystring);
 					return;
 				}
-				}catch (JSONException e) {
+			}catch (JSONException e) {
 				showErrorMessage("JSON ERROR");
 					return;
 			}
-			
-	  
 
-*/
+
 				String mystring = "|";
 				Integer passes = 0;
-				//ADDED ENDS HERE
+			//ADDED ENDS HERE
 	try {
 		// Method for Debugging.
 		//if (data.isNull(0) || data.isNull(1) || data.isNull(2)) {
