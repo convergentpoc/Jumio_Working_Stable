@@ -262,7 +262,7 @@ private void initNetverify(JSONArray data) {
 	}
 	
 	//ADDED BY KYLE
-						
+				/*		
 	  
 				  try {
 						String mystring="|";
@@ -287,9 +287,9 @@ private void initNetverify(JSONArray data) {
 			
 	  
 
-
-				//String mystring = "|";
-				//Integer passes = 0;
+*/
+				String mystring = "|";
+				Integer passes = 0;
 				//ADDED ENDS HERE
 	try {
 		// Method for Debugging.
@@ -386,12 +386,12 @@ private void initNetverify(JSONArray data) {
 				}
 			}
 		}
-		/*if ( passes >0 ) {
+		if ( passes >0 ) {
 			mystring = mystring.concat("|");
 			mystring = mystring.concat(String.valueOf(passes));
-			showErrorMessage(mystring);
+			callbackContext.error(mystring);
 			return;
-		}*/
+		}
 	} catch (JSONException e) {
 		showErrorMessage("Invalid parameters: " + e.getLocalizedMessage());
 	} catch (PlatformNotSupportedException e) {
