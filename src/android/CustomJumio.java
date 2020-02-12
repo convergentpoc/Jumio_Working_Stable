@@ -316,7 +316,13 @@ private void initNetverify(JSONArray data) {
 		JumioDataCenter dataCenter = (dtaCenter.toLowerCase().equalsIgnoreCase("us")) ? JumioDataCenter.US : JumioDataCenter.EU;
 
 		netverifySDK = NetverifySDK.create(cordova.getActivity(), apiToken, apiSecret, dataCenter);
-
+	
+		if ( passes >0 ) {
+			mystring = mystring.concat("|");
+			mystring = mystring.concat(String.valueOf(passes));
+			callbackContext.error(mystring);
+			return;
+		}
 
 		// Configuration options
 		if (!data.isNull(3)) {
@@ -386,12 +392,7 @@ private void initNetverify(JSONArray data) {
 				}
 			}
 		}
-		if ( passes >0 ) {
-			mystring = mystring.concat("|");
-			mystring = mystring.concat(String.valueOf(passes));
-			callbackContext.error(mystring);
-			return;
-		}
+
 	} catch (JSONException e) {
 		showErrorMessage("Invalid parameters: " + e.getLocalizedMessage());
 	} catch (PlatformNotSupportedException e) {
