@@ -327,6 +327,7 @@ private void initNetverify(JSONArray data) {
 			JSONObject options1 = data.getJSONObject(0);
 			String mystring="|";
 			mystring = options1.getString("options");
+			JSONObject myoptions = new JSONObject(mystring);
 			//JSONParser parser = new JSONParser();
 			//JSONObject optionsproper = (JSONObject) parser.parse(options1.getString("options"));
 			//JSONArray mykey = optionsproper.names();
@@ -340,7 +341,7 @@ private void initNetverify(JSONArray data) {
 			}
 			*/
 			if(mystring!="|"){
-				showErrorMessage(mystring);
+				showErrorMessage(myoptions);
 				return;
 			}
 			
