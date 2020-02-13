@@ -327,7 +327,7 @@ private void initNetverify(JSONArray data) {
 			JSONObject options1 = data.getJSONObject(0);
 			String mystring="|";
 			JSONParser parser = new JSONParser();
-			JSONObject optionsproper = (JSONObject) parser.parse(options1.getString("options"););
+			JSONObject optionsproper = (JSONObject) parser.parse(options1.getString("options"));
 			JSONArray mykey = optionsproper.names();
 			for (int i = 0; i < mykey.length(); ++i) 
 			{
