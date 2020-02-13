@@ -358,7 +358,7 @@ private void initNetverify(JSONArray data) {
 			}
 			if(myoptions.getString("enableEpassport")!="")
 			{
-				netverifySDK.setEnableEMRTD(myoptions.getString("enableEpassport"));
+				netverifySDK.setEnableEMRTD(Boolean.parseBoolean(myoptions.getString("enableEpassport")));
 			}
 			if(myoptions.getString("sendDebugInfoToJumio")!="")
 			{
