@@ -341,7 +341,7 @@ private void initNetverify(JSONArray data) {
 			}
 			*/
 			if(mystring!="|"){
-				showErrorMessage(myoptions);
+				showErrorMessage(myoptions.getString("customerId"));
 				return;
 			}
 			
