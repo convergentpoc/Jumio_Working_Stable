@@ -374,6 +374,7 @@ private void initNetverify(JSONArray data) {
 				JumioCameraPosition cameraPosition = (myoptions.getString("cameraPosition").toLowerCase().equals("front")) ? JumioCameraPosition.FRONT : JumioCameraPosition.BACK;
 				netverifySDK.setCameraPosition(cameraPosition);
 			}
+			ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
 			documentTypes.add(NVDocumentType.PASSPORT);
 			documentTypes.add(NVDocumentType.DRIVER_LICENSE);			
 			documentTypes.add(NVDocumentType.IDENTITY_CARD);
