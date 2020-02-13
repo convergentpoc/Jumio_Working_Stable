@@ -330,7 +330,7 @@ private void initNetverify(JSONArray data) {
 			JSONObject myoptions = new JSONObject(mystring); //Options are now here
 			if(myoptions.getString("requireVerification")!="")
 			{
-				netverifySDK.setRequireVerification(myoptions.getString("requireVerification"));
+				netverifySDK.setRequireVerification(Boolean.parseBoolean(myoptions.getString("requireVerification")));
 			}
 			if(myoptions.getString("callbackUrl")!="")
 			{
@@ -338,7 +338,7 @@ private void initNetverify(JSONArray data) {
 			}			
 			if(myoptions.getString("requireFaceMatch")!="")
 			{
-				netverifySDK.setRequireFaceMatch(myoptions.getString("requireFaceMatch"));
+				netverifySDK.setRequireFaceMatch(Boolean.parseBoolean(myoptions.getString("requireFaceMatch")));
 			}
 			if(myoptions.getString("preselectedCountry")!="")
 			{
@@ -362,12 +362,12 @@ private void initNetverify(JSONArray data) {
 			}
 			if(myoptions.getString("sendDebugInfoToJumio")!="")
 			{
-				netverifySDK.sendDebugInfoToJumio(myoptions.getString("sendDebugInfoToJumio"));
+				netverifySDK.sendDebugInfoToJumio(Boolean.parseBoolean(myoptions.getString("sendDebugInfoToJumio")));
 
 			}
 			if(myoptions.getString("dataExtractionOnMobileOnly")!="")
 			{
-				netverifySDK.setDataExtractionOnMobileOnly(myoptions.getString("dataExtractionOnMobileOnly"));
+				netverifySDK.setDataExtractionOnMobileOnly(Boolean.parseBoolean(myoptions.getString("dataExtractionOnMobileOnly")));
 			}
 			if(myoptions.getString("cameraPosition")!="")
 			{
