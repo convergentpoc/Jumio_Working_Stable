@@ -327,23 +327,63 @@ private void initNetverify(JSONArray data) {
 			JSONObject options1 = data.getJSONObject(0);
 			String mystring="|";
 			mystring = options1.getString("options");
-			JSONObject myoptions = new JSONObject(mystring);
-			//JSONParser parser = new JSONParser();
-			//JSONObject optionsproper = (JSONObject) parser.parse(options1.getString("options"));
-			//JSONArray mykey = optionsproper.names();
-			/*
-			for (int i = 0; i < mykey.length(); ++i) 
+			JSONObject myoptions = new JSONObject(mystring); //Options are now here
+			if(myoptions.getString("requireVerification")!="")
 			{
-			   String mykeys = mykey.getString(i); 
-			   String myvalue = optionsproper.getString(mykeys);
-			   mystring = mystring.concat(optionsproper.names(i)+":"+myvalue);
-			   mystring = mystring.concat("|");
+				netverifySDK.setRequireVerification(myoptions.getString("requireVerification"));
 			}
-			*/
-			if(mystring!="|"){
+			if(myoptions.getString("callbackUrl")!="")
+			{
+				netverifySDK.setCallbackUrl(myoptions.getString("callbackUrl"));
+			}			
+			if(myoptions.getString("requireFaceMatch")!="")
+			{
+				netverifySDK.setRequireFaceMatch(myoptions.getString("requireFaceMatch"));
+			}
+			if(myoptions.getString("preselectedCountry")!="")
+			{
+				netverifySDK.setPreselectedCountry(myoptions.getString("preselectedCountry"));
+			}			
+			if(myoptions.getString("merchantScanReference")!="")
+			{
+				netverifySDK.setMerchantScanReference(myoptions.getString("merchantScanReference"));
+			}
+			if(myoptions.getString("merchantReportingCriteria")!="")
+			{
+				netverifySDK.setMerchantReportingCriteria(myoptions.getString("merchantReportingCriteria"));
+			}
+			if(myoptions.getString("customerID")!="")
+			{
+				netverifySDK.setCustomerId(myoptions.getString("customerID"));
+			}
+			if(myoptions.getString("enableEpassport")!="")
+			{
+				netverifySDK.setEnableEMRTD(myoptions.getString("enableEpassport"));
+			}
+			if(myoptions.getString("sendDebugInfoToJumio")!="")
+			{
+				netverifySDK.sendDebugInfoToJumio(myoptions.getString("sendDebugInfoToJumio"));
+
+			}
+			if(myoptions.getString("dataExtractionOnMobileOnly")!="")
+			{
+				netverifySDK.setDataExtractionOnMobileOnly(myoptions.getString("dataExtractionOnMobileOnly"));
+			}
+			if(myoptions.getString("cameraPosition")!="")
+			{
+				JumioCameraPosition cameraPosition = (myoptions.getString("cameraPosition").toLowerCase().equals("front")) ? JumioCameraPosition.FRONT : JumioCameraPosition.BACK;
+				netverifySDK.setCameraPosition(cameraPosition);
+			}
+			documentTypes.add(NVDocumentType.PASSPORT);
+			documentTypes.add(NVDocumentType.DRIVER_LICENSE);			
+			documentTypes.add(NVDocumentType.IDENTITY_CARD);
+			documentTypes.add(NVDocumentType.VISA);
+			netverifySDK.setPreselectedDocumentTypes(documentTypes);
+
+			/*if(mystring!="|"){
 				showErrorMessage(myoptions.getString("customerId"));
 				return;
-			}
+			}*/
 			
 		 } catch (JSONException e) {
 				showErrorMessage("KYLE'S IMPLEMENTATION ERROR");
@@ -351,7 +391,7 @@ private void initNetverify(JSONArray data) {
 			}
 		//End of Kyle's Implementation of setting up the netverify SDK (Has its own Try catch)
 		
-		// Configuration options
+		// Configuration options, assume that it does not pass here ,will comment in the future
 		if (!data.isNull(0)) {
 			JSONObject options = data.getJSONObject(0);
 			Iterator < String > keys = options.keys();
