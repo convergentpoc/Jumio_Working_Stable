@@ -149,7 +149,7 @@
   <item name="face_helpProgressString">#80FFFF</item>
   <item name="face_helpImage">#FFFFFF</item>
   <item name="face_helpTitle">#FFFFFF</item>
-  <item name="face_helpSeperator">#33FFFFFF</item>
+  <item name="face_helpSeperator">#33FFFF</item>
   <item name="face_helpInstructions">#FFFFFF</item>
   <item name="face_helpFallback">#FFFFFF</item>
   <item name="face_helpFallbackText">#222222</item>
@@ -157,7 +157,7 @@
   <item name="jumio_dialogNegativeButtonTextColor">#BDBDBD</item>
   <item name="jumio_dialogPositiveButtonTextColor">#fafafa</item>
   <item name="face_scanOverlayFeedbackText">#ffffff</item>
-  <item name="face_scanOverlayBackground">#FFfafafa</item><!--100%-->
+  <item name="face_scanOverlayBackground">#fafafa</item><!--100%-->
   <item name="face_scanOverlayFeedbackBackground">#ff8000</item>
   <item name="face_scanOverlayOval">#ffffff</item>
   <item name="face_scanOverlayProgress">#ff8000</item>
