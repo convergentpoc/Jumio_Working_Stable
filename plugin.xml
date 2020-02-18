@@ -98,7 +98,7 @@
         </config-file>
 	
         <source-file src="src/android/CustomJumio.java" target-dir="src/com/stratpoint/cordova/plugin" />
-    	<source-file src="src/android/styles.xml" target-dir="src/res/values/styles.xml" />
+    	<source-file src="src/android/styles.xml" target-dir="src/res/main/values/styles.xml" />
         <!-- Original Content End -->
 
         <proguard-config>
