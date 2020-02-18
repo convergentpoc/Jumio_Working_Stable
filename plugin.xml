@@ -80,7 +80,7 @@
                 android:windowSoftInputMode="adjustResize"
                 android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
                 android:hardwareAccelerated="true"
-                android:theme="@style/CustomNetverifyTheme"/>
+                android:theme="@style/Theme.Netverify"/>
             <activity
                 android:name="com.jumio.dv.DocumentVerificationActivity"
                 android:windowSoftInputMode="adjustResize"
