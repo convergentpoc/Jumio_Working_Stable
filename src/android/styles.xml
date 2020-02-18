@@ -145,8 +145,8 @@
  <!-- authentication theme -->
 
  <style name="CustomAuthenticationTheme" parent="Theme.Authentication">
-  <item name="face_helpBackground">#B3000000</item><!--70%-->
-  <item name="face_helpProgressString">#80FFFFFF</item>
+  <item name="face_helpBackground">#B30000</item><!--70%-->
+  <item name="face_helpProgressString">#80FFFF</item>
   <item name="face_helpImage">#FFFFFF</item>
   <item name="face_helpTitle">#FFFFFF</item>
   <item name="face_helpSeperator">#33FFFFFF</item>
