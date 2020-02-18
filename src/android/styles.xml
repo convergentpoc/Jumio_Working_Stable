@@ -57,23 +57,6 @@
   <item name="netverify_scanOverlayFill">#66FFFF</item>
   <item name="netverify_scanBackground">#400000</item><!--25%-->
 
-  <!-- 3d liveness specific colors -->
-
-  <item name="attr/face_scanOverlayFeedbackText">#ffffff</item>
-  <item name="attr/face_scanOverlayBackground">#fafafa</item><!--100%-->
-  <item name="attr/face_scanOverlayFeedbackBackground">#ff8000</item>
-  <item name="attr/face_scanOverlayOval">#ffffff</item>
-  <item name="attr/face_scanOverlayProgress">#ff8000</item>
-  <item name="attr/face_helpBackground">#B30000</item><!--70%-->
-  <item name="attr/face_helpProgressString">#80FFFF</item>
-  <item name="attr/face_helpImage">#FFFFFF</item>
-  <item name="attr/face_helpTitle">#FFFFFF</item>
-  <item name="attr/face_helpSeperator">#33FFFF</item>
-  <item name="attr/face_helpInstructions">#FFFFFF</item>
-  <item name="attr/face_helpFallback">#FFFFFF</item>
-  <item name="attr/face_helpFallbackText">#222222</item>
-  <item name="attr/face_helpButtonTheme">@style/Netverify.Helpview.Button</item>
-
   <!-- verification specific colors -->
 
   <item name="netverify_confirmationBackground">#fafafa</item>
@@ -139,28 +122,6 @@
   <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
   <item name="android:background">#fafafa</item>
   <item name="android:textColor">#FFFFFF</item>
- </style>
-
-
- <!-- authentication theme -->
-
- <style name="CustomAuthenticationTheme" parent="Theme.Authentication">
-  <item name="attr/face_helpBackground">#B30000</item><!--70%-->
-  <item name="attr/face_helpProgressString">#80FFFF</item>
-  <item name="attr/face_helpImage">#FFFFFF</item>
-  <item name="attr/face_helpTitle">#FFFFFF</item>
-  <item name="attr/face_helpSeperator">#33FFFF</item>
-  <item name="attr/face_helpInstructions">#FFFFFF</item>
-  <item name="attr/face_helpFallback">#FFFFFF</item>
-  <item name="attr/face_helpFallbackText">#222222</item>
-  <item name="attr/face_helpButtonTheme">@style/Authentication.Helpview.Button</item>
-  <item name="jumio_dialogNegativeButtonTextColor">#BDBDBD</item>
-  <item name="jumio_dialogPositiveButtonTextColor">#fafafa</item>
-  <item name="attr/face_scanOverlayFeedbackText">#ffffff</item>
-  <item name="attr/face_scanOverlayBackground">#fafafa</item><!--100%-->
-  <item name="attr/face_scanOverlayFeedbackBackground">#ff8000</item>
-  <item name="attr/face_scanOverlayOval">#ffffff</item>
-  <item name="attr/face_scanOverlayProgress">#ff8000</item>
  </style>
 
 </resources>
