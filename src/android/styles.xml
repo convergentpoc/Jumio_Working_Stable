@@ -42,33 +42,33 @@
 
   <!-- scan instructions specific colors -->
 
-  <item name="netverify_helpBackground">#B3000000</item><!--70%-->
-  <item name="netverify_helpProgressString">#80FFFFFF</item>
+  <item name="netverify_helpBackground">#B30000</item><!--70%-->
+  <item name="netverify_helpProgressString">#80FFFF</item>
   <item name="netverify_helpTitle">#FFFFFF</item>
   <item name="netverify_helpImage">#FFFFFF</item>
-  <item name="netverify_helpSeperator">#33FFFFFF</item>
+  <item name="netverify_helpSeperator">#33FFFF</item>
   <item name="netverify_helpInstructions">#FFFFFF</item>
   <item name="netverify_helpFallback">#FFFFFF</item>
   <item name="netverify_helpFallbackText">#222222</item>
 
   <!-- scan document (scan screen) specific colors -->
 
-  <item name="netverify_scanOverlay">#B3FFFFFF</item>
-  <item name="netverify_scanOverlayFill">#66FFFFFF</item>
-  <item name="netverify_scanBackground">#40000000</item><!--25%-->
+  <item name="netverify_scanOverlay">#B3FFFF</item>
+  <item name="netverify_scanOverlayFill">#66FFFF</item>
+  <item name="netverify_scanBackground">#400000</item><!--25%-->
 
   <!-- 3d liveness specific colors -->
 
   <item name="face_scanOverlayFeedbackText">#ffffff</item>
-  <item name="face_scanOverlayBackground">#FFfafafa</item><!--100%-->
+  <item name="face_scanOverlayBackground">#fafafa</item><!--100%-->
   <item name="face_scanOverlayFeedbackBackground">#ff8000</item>
   <item name="face_scanOverlayOval">#ffffff</item>
   <item name="face_scanOverlayProgress">#ff8000</item>
-  <item name="face_helpBackground">#B3000000</item><!--70%-->
-  <item name="face_helpProgressString">#80FFFFFF</item>
+  <item name="face_helpBackground">#B30000</item><!--70%-->
+  <item name="face_helpProgressString">#80FFFF</item>
   <item name="face_helpImage">#FFFFFF</item>
   <item name="face_helpTitle">#FFFFFF</item>
-  <item name="face_helpSeperator">#33FFFFFF</item>
+  <item name="face_helpSeperator">#33FFFF</item>
   <item name="face_helpInstructions">#FFFFFF</item>
   <item name="face_helpFallback">#FFFFFF</item>
   <item name="face_helpFallbackText">#222222</item>
@@ -139,6 +139,28 @@
   <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
   <item name="android:background">#fafafa</item>
   <item name="android:textColor">#FFFFFF</item>
+ </style>
+
+
+ <!-- authentication theme -->
+
+ <style name="CustomAuthenticationTheme" parent="Theme.Authentication">
+  <item name="face_helpBackground">#B30000</item><!--70%-->
+  <item name="face_helpProgressString">#80FFFF</item>
+  <item name="face_helpImage">#FFFFFF</item>
+  <item name="face_helpTitle">#FFFFFF</item>
+  <item name="face_helpSeperator">#33FFFF</item>
+  <item name="face_helpInstructions">#FFFFFF</item>
+  <item name="face_helpFallback">#FFFFFF</item>
+  <item name="face_helpFallbackText">#222222</item>
+  <item name="face_helpButtonTheme">@style/Authentication.Helpview.Button</item>
+  <item name="jumio_dialogNegativeButtonTextColor">#BDBDBD</item>
+  <item name="jumio_dialogPositiveButtonTextColor">#fafafa</item>
+  <item name="face_scanOverlayFeedbackText">#ffffff</item>
+  <item name="face_scanOverlayBackground">#fafafa</item><!--100%-->
+  <item name="face_scanOverlayFeedbackBackground">#ff8000</item>
+  <item name="face_scanOverlayOval">#ffffff</item>
+  <item name="face_scanOverlayProgress">#ff8000</item>
  </style>
 
 </resources>
