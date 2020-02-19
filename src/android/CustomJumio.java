@@ -716,14 +716,14 @@ private void initNetverify(JSONArray data) {
 					}
 
 					netverifySDK.setPreselectedDocumentTypes(documentTypes);
-				}*/
+				}
 			}
 		}
 		
 
 	} catch (JSONException e) {
 		showErrorMessage("Invalid parameters: " + e.getLocalizedMessage());
-	} catch (PlatformNotSupportedException e) {
+	*/} catch (PlatformNotSupportedException e) {
 		showErrorMessage("Error initializing the Netverify SDK: " + e.getLocalizedMessage());
 	}
 }
