@@ -20,22 +20,26 @@ CustomJumio.prototype.initNetverify = function(token, secret, datacenter, option
   requestOptions.datacenter = datacenter;
   requestOptions.options = options;
   requestOptions.customization = customization;
-	//[token, secret, datacenter, options, customization]
  cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'initNetverify', [requestOptions]);
-//cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'initNetverify', [token,secret,datacenter,options,customization]);
-	
-  //Attempt to make it array for easier access.
-  // var requestOptions = [];
-  // requestOptions[0] = token;
-  // requestOptions[1] = secret;
-  // requestOptions[2] = datacenter;
-  // requestOptions[3] = options;
-  // requestOptions[4] = customization;
-
-  // cordova.exec(successCallback, errorCallback, 'CustomJumio', 'initNetverify', requestOptions);
 }
 
 CustomJumio.prototype.startNetverify = function(success, error) {
+  cordova.exec(success, 
+	      error ,
+	  "CustomJumio", "startNetverify", []);
+};
+CustomJumio.prototype.initNetverify2 = function(token, secret, datacenter, options, customization, successCallback, errorCallback) {
+  
+  var requestOptions = {};
+  requestOptions.token = token;
+  requestOptions.secret = secret;
+  requestOptions.datacenter = datacenter;
+  requestOptions.options = options;
+  requestOptions.customization = customization;
+ cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'initNetverify', [requestOptions]);
+}
+
+CustomJumio.prototype.startNetverify2 = function(success, error) {
   cordova.exec(success, 
 	      error ,
 	  "CustomJumio", "startNetverify", []);
