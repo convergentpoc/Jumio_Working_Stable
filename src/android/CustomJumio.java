@@ -49,6 +49,8 @@ public class CustomJumio extends CordovaPlugin {
 	private static final String ACTION_BAM_START = "startBAM";
 	private static final String ACTION_NV_INIT = "initNetverify";
 	private static final String ACTION_NV_START = "startNetverify";
+	private static final String ACTION_NV_INIT2 = "initNetverify2";
+	private static final String ACTION_NV_START2 = "startNetverify2";
 	private static final String ACTION_DV_INIT = "initDocumentVerification";
 	private static final String ACTION_DV_START = "startDocumentVerification";
 
@@ -116,7 +118,18 @@ public class CustomJumio extends CordovaPlugin {
 
 			result.setKeepCallback(true);
 			return true;
-		} else if (action.equals(ACTION_DV_INIT)) {
+		} else if (action.equals(ACTION_NV_INIT2)) {
+			initNetverify2(args);
+			result = new PluginResult(Status.OK);
+			this.callbackContext.sendPluginResult(result);
+			result.setKeepCallback(false);
+			return true;
+		} else if (action.equals(ACTION_NV_START2)) {
+			startNetverify2(args);
+			result = new PluginResult(Status.OK);
+			result.setKeepCallback(true);
+			return true;
+		}else if (action.equals(ACTION_DV_INIT)) {
 			initDocumentVerification(args);
 			result = new PluginResult(Status.NO_RESULT);
 			result.setKeepCallback(false);
@@ -507,6 +520,213 @@ private void initNetverify(JSONArray data) {
 	}
 }
 
+	private void initNetverify2(JSONArray data) {
+	if (!NetverifySDK.isSupportedPlatform(cordova.getActivity())) {
+		showErrorMessage("This platform is not supported.");
+		return;
+	}
+
+	try {
+
+		String token;
+		String secret;
+		String dtaCenter;
+		try {
+			JSONObject options = data.getJSONObject(0);
+			token = options.getString("token");
+			secret = options.getString("secret");
+			dtaCenter = options.getString("datacenter");
+		} catch (JSONException e) {
+			callbackContext.error("Error Encountered: " + e.getMessage());
+			return;
+		}
+
+		String apiToken = token; 
+		String apiSecret = secret; 
+		JumioDataCenter dataCenter = (dtaCenter.toLowerCase().equalsIgnoreCase("us")) ? JumioDataCenter.US : JumioDataCenter.EU;
+		netverifySDK = NetverifySDK.create(cordova.getActivity(), apiToken, apiSecret, dataCenter);
+
+		String mychecker = "0";
+		try {
+		
+			JSONObject options1 = data.getJSONObject(0);
+			String mystring="|";
+			mystring = options1.getString("options");
+			JSONObject myoptions = new JSONObject(mystring); //Options are now here
+			mychecker=  mychecker.concat("1");
+			if(myoptions.has("requireVerification"))
+			{
+				if(myoptions.getString("requireVerification")!="")
+				{
+					netverifySDK.setRequireVerification(Boolean.parseBoolean(myoptions.getString("requireVerification")));
+				}
+			}
+			
+			
+			mychecker=  mychecker.concat("2");
+			if(myoptions.has("callbackUrl"))
+			{	
+				if(myoptions.getString("callbackUrl")!="")
+				{
+					netverifySDK.setCallbackUrl(myoptions.getString("callbackUrl"));
+				}
+			}
+			
+			mychecker=  mychecker.concat("3");
+			if(myoptions.has("requireFaceMatch"))
+			{
+				if(myoptions.getString("requireFaceMatch")!="")
+				{
+					netverifySDK.setRequireFaceMatch(Boolean.parseBoolean(myoptions.getString("requireFaceMatch")));
+				}
+			}
+			mychecker=  mychecker.concat("4");
+			if(myoptions.has("preselectedCountry"))
+			{
+				if(myoptions.getString("preselectedCountry")!="")
+				{
+					netverifySDK.setPreselectedCountry(myoptions.getString("preselectedCountry"));
+				}
+			}
+			mychecker=  mychecker.concat("5");
+			if(myoptions.has("merchantScanReference"))
+			{
+				if(myoptions.getString("merchantScanReference")!="")
+				{
+					netverifySDK.setMerchantScanReference(myoptions.getString("merchantScanReference"));
+				}
+			}
+			mychecker=  mychecker.concat("6");
+			if(myoptions.has("merchantReportingCriteria"))
+			{
+				if(myoptions.getString("merchantReportingCriteria")!="")
+				{
+					netverifySDK.setMerchantReportingCriteria(myoptions.getString("merchantReportingCriteria"));
+				}
+			}
+			mychecker=  mychecker.concat("7");
+			if(myoptions.has("customerID"))
+			{
+				if(myoptions.getString("customerID")!="")
+				{
+					netverifySDK.setCustomerId(myoptions.getString("customerID"));
+				}
+			}
+			mychecker=  mychecker.concat("8");
+			if(myoptions.has("enableEpassport"))
+			{
+				if(myoptions.getString("enableEpassport")!="")
+				{
+					netverifySDK.setEnableEMRTD(Boolean.parseBoolean(myoptions.getString("enableEpassport")));
+				}
+			}
+			mychecker=  mychecker.concat("9");
+			if(myoptions.has("sendDebugInfoToJumio"))
+			{
+				if(myoptions.getString("sendDebugInfoToJumio")!="")
+				{
+					netverifySDK.sendDebugInfoToJumio(Boolean.parseBoolean(myoptions.getString("sendDebugInfoToJumio")));
+				}
+			}
+			mychecker=  mychecker.concat("10");
+			if(myoptions.has("requireVerificdataExtractionOnMobileOnlyation"))
+			{
+				if(myoptions.getString("dataExtractionOnMobileOnly")!="")
+				{
+					netverifySDK.setDataExtractionOnMobileOnly(Boolean.parseBoolean(myoptions.getString("dataExtractionOnMobileOnly")));
+				}
+			}
+			mychecker=  mychecker.concat("11");
+			if(myoptions.has("cameraPosition"))
+			{
+				if(myoptions.getString("cameraPosition")!="")
+				{
+					JumioCameraPosition cameraPosition = (myoptions.getString("cameraPosition").toLowerCase().equals("front")) ? JumioCameraPosition.FRONT : JumioCameraPosition.BACK;
+					netverifySDK.setCameraPosition(cameraPosition);
+				}
+			}
+			mychecker=  mychecker.concat("12");
+			ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
+			documentTypes.add(NVDocumentType.PASSPORT);
+			documentTypes.add(NVDocumentType.DRIVER_LICENSE);			
+			documentTypes.add(NVDocumentType.IDENTITY_CARD);
+			documentTypes.add(NVDocumentType.VISA);
+			netverifySDK.setPreselectedDocumentTypes(documentTypes);
+			mychecker=  mychecker.concat("13");
+			
+		 } catch (JSONException e) {
+				showErrorMessage("KYLE'S IMPLEMENTATION ERROR" + mychecker);
+				return;
+			}
+		//End of Kyle's Implementation of setting up the netverify SDK (Has its own Try catch)
+		/*
+		// Configuration options, assume that it does not pass here ,will comment in the future
+		if (!data.isNull(0)) {
+			JSONObject options = data.getJSONObject(0);
+			Iterator < String > keys = options.keys();
+			while (keys.hasNext()) {
+				String key = keys.next();
+				if (key.equalsIgnoreCase("requireVerification")) {
+					netverifySDK.setRequireVerification(options.getBoolean(key));
+				} else if (key.equalsIgnoreCase("callbackUrl")) {
+					netverifySDK.setCallbackUrl(options.getString(key));
+				} else if (key.equalsIgnoreCase("requireFaceMatch")) {
+					netverifySDK.setRequireFaceMatch(options.getBoolean(key));
+				} else if (key.equalsIgnoreCase("preselectedCountry")) {
+					netverifySDK.setPreselectedCountry(options.getString(key));
+				} else if (key.equalsIgnoreCase("merchantScanReference")) {
+					netverifySDK.setMerchantScanReference(options.getString(key));
+				} else if (key.equalsIgnoreCase("merchantReportingCriteria")) {
+					netverifySDK.setMerchantReportingCriteria(options.getString(key));
+				} else if (key.equalsIgnoreCase("customerID")) {
+					netverifySDK.setCustomerId(options.getString(key));
+				} else if (key.equalsIgnoreCase("enableEpassport")) {
+					netverifySDK.setEnableEMRTD(options.getBoolean(key));
+				} else if (key.equalsIgnoreCase("sendDebugInfoToJumio")) {
+					netverifySDK.sendDebugInfoToJumio(options.getBoolean(key));
+				} else if (key.equalsIgnoreCase("dataExtractionOnMobileOnly")) {
+					netverifySDK.setDataExtractionOnMobileOnly(options.getBoolean(key));
+				} else if (key.equalsIgnoreCase("cameraPosition")) {
+					JumioCameraPosition cameraPosition = (options.getString(key).toLowerCase().equals("front")) ? JumioCameraPosition.FRONT : JumioCameraPosition.BACK;
+					netverifySDK.setCameraPosition(cameraPosition);
+				} else if (key.equalsIgnoreCase("preselectedDocumentVariant")) {
+					NVDocumentVariant variant = (options.getString(key).toLowerCase().equals("paper")) ? NVDocumentVariant.PAPER : NVDocumentVariant.PLASTIC;
+					netverifySDK.setPreselectedDocumentVariant(variant);
+				} else if (key.equalsIgnoreCase("documentTypes")) {
+					JSONArray jsonTypes = options.getJSONArray(key);
+					ArrayList < String > types = new ArrayList < String > ();
+					if (jsonTypes != null) {
+						int len = jsonTypes.length();
+						for (int i = 0; i < len; i++) {
+							types.add(jsonTypes.get(i).toString());
+						}
+					}
+
+					ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
+					for (String type: types) {
+						if (type.toLowerCase().equals("passport")) {
+							documentTypes.add(NVDocumentType.PASSPORT);
+						} else if (type.toLowerCase().equals("driver_license")) {
+							documentTypes.add(NVDocumentType.DRIVER_LICENSE);
+						} else if (type.toLowerCase().equals("identity_card")) {
+							documentTypes.add(NVDocumentType.IDENTITY_CARD);
+						} else if (type.toLowerCase().equals("visa")) {
+							documentTypes.add(NVDocumentType.VISA);
+						}
+					}
+
+					netverifySDK.setPreselectedDocumentTypes(documentTypes);
+				}
+			}
+		}
+		*/
+
+	} catch (JSONException e) {
+		showErrorMessage("Invalid parameters: " + e.getLocalizedMessage());
+	} catch (PlatformNotSupportedException e) {
+		showErrorMessage("Error initializing the Netverify SDK: " + e.getLocalizedMessage());
+	}
+}
   private void startNetverify(JSONArray data) {
 		if (netverifySDK == null) {
 			showErrorMessage("The Netverify SDK is not initialized yet. Call initNetverify() first.");
@@ -527,6 +747,27 @@ private void initNetverify(JSONArray data) {
 		this.cordova.setActivityResultCallback(this);
 		this.cordova.getActivity().runOnUiThread(runnable);
 	}
+  private void startNetverify2(JSONArray data) {
+		if (netverifySDK == null) {
+			showErrorMessage("The Netverify SDK is not initialized yet. Call initNetverify() first.");
+			return;
+		}
+
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					checkPermissionsAndStart(netverifySDK);
+				} catch (Exception e) {
+					showErrorMessage("Error starting the Netverify SDK: " + e.getLocalizedMessage());
+				}
+			}
+		};
+
+		this.cordova.setActivityResultCallback(this);
+		this.cordova.getActivity().runOnUiThread(runnable);
+	}
+
 
   private void initDocumentVerification(JSONArray data) {
 		if (!DocumentVerificationSDK.isSupportedPlatform(cordova.getActivity())) {
