@@ -665,7 +665,7 @@ private void initNetverify(JSONArray data) {
 			JSONObject options = data.getJSONObject(0);
 			Iterator < String > keys = options.keys();
 			while (keys.hasNext()) {
-				String key = keys.next();
+				//String key = keys.next();
 				if (key.equalsIgnoreCase("requireVerification")) {
 					netverifySDK.setRequireVerification(options.getBoolean(key));
 				} else if (key.equalsIgnoreCase("callbackUrl")) {
@@ -716,8 +716,8 @@ private void initNetverify(JSONArray data) {
 					}
 
 					netverifySDK.setPreselectedDocumentTypes(documentTypes);
-				}
-			}*/
+				}*/
+			}
 		}
 		
 
