@@ -717,9 +717,9 @@ private void initNetverify(JSONArray data) {
 
 					netverifySDK.setPreselectedDocumentTypes(documentTypes);
 				}
-			}
+			}*/
 		}
-		*/
+		
 
 	} catch (JSONException e) {
 		showErrorMessage("Invalid parameters: " + e.getLocalizedMessage());
