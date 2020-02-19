@@ -651,6 +651,17 @@ private void initNetverify(JSONArray data) {
 			netverifySDK.setPreselectedDocumentTypes(documentTypes);
 			mychecker=  mychecker.concat("13");
 			
+			netverifySDK.initiate(new NetverifyInitiateCallback() {
+				@Override
+				public void onNetverifyInitiateSuccess() {
+						callbackContext.success("NetVerify SDK initialized successfully");
+				}
+				@Override
+				public void onNetverifyInitiateError(String errorCode, String errorMessage, boolean retryPossible) {
+						showErrorMessage("Authentication initiate failed - " + errorCode + ": " + errorMessage);
+				}
+			});
+			
 		 } catch (JSONException e) {
 				showErrorMessage("KYLE'S IMPLEMENTATION ERROR" + mychecker);
 				return;
@@ -685,19 +696,12 @@ private void initNetverify(JSONArray data) {
 			return;
 		}
 
-		Runnable runnable = new Runnable() {
-			@Override
-			public void run() {
-				try {
-					checkPermissionsAndStart(netverifySDK);
-				} catch (Exception e) {
-					showErrorMessage("Error starting the Netverify SDK: " + e.getLocalizedMessage());
-				}
-			}
-		};
-
-		this.cordova.setActivityResultCallback(this);
-		this.cordova.getActivity().runOnUiThread(runnable);
+		
+	  	try {
+			netverifySDK.start();
+		} catch (Exception e) {
+			showErrorMessage("Error starting the Netverify SDK: " + e.getLocalizedMessage());
+		}
 	}
 
 
