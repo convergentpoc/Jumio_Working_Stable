@@ -322,11 +322,11 @@ private void initNetverify(JSONArray data) {
 		*/
 		//End of Not working iteration counter
 		//Start of Kyle's Implementation of setting up the netverify SDK
+		String mychecker = "0";
 		try {
 		
 			JSONObject options1 = data.getJSONObject(0);
 			String mystring="|";
-			String mychecker = "0";
 			mystring = options1.getString("options");
 			JSONObject myoptions = new JSONObject(mystring); //Options are now here
 			mychecker=  mychecker.concat("1");
