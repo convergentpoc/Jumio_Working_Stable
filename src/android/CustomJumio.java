@@ -326,68 +326,81 @@ private void initNetverify(JSONArray data) {
 		
 			JSONObject options1 = data.getJSONObject(0);
 			String mystring="|";
+			String mychecker = "0";
 			mystring = options1.getString("options");
 			JSONObject myoptions = new JSONObject(mystring); //Options are now here
+			mychecker=  mychecker.concat("1");
 			if(myoptions.getString("requireVerification")!="")
 			{
 				netverifySDK.setRequireVerification(Boolean.parseBoolean(myoptions.getString("requireVerification")));
 			}
+			mychecker=  mychecker.concat("2");
 			if(myoptions.getString("callbackUrl")!="")
 			{
 				netverifySDK.setCallbackUrl(myoptions.getString("callbackUrl"));
-			}			
+			}
+			mychecker=  mychecker.concat("3");
 			if(myoptions.getString("requireFaceMatch")!="")
 			{
 				netverifySDK.setRequireFaceMatch(Boolean.parseBoolean(myoptions.getString("requireFaceMatch")));
 			}
+			mychecker=  mychecker.concat("4");
 			if(myoptions.getString("preselectedCountry")!="")
 			{
 				netverifySDK.setPreselectedCountry(myoptions.getString("preselectedCountry"));
-			}			
+			}
+			mychecker=  mychecker.concat("5");
 			if(myoptions.getString("merchantScanReference")!="")
 			{
 				netverifySDK.setMerchantScanReference(myoptions.getString("merchantScanReference"));
 			}
+			mychecker=  mychecker.concat("6");
 			if(myoptions.getString("merchantReportingCriteria")!="")
 			{
 				netverifySDK.setMerchantReportingCriteria(myoptions.getString("merchantReportingCriteria"));
 			}
+			mychecker=  mychecker.concat("7");
 			if(myoptions.getString("customerID")!="")
 			{
 				netverifySDK.setCustomerId(myoptions.getString("customerID"));
 			}
+			mychecker=  mychecker.concat("8");
 			if(myoptions.getString("enableEpassport")!="")
 			{
 				netverifySDK.setEnableEMRTD(Boolean.parseBoolean(myoptions.getString("enableEpassport")));
 			}
+			mychecker=  mychecker.concat("9");
 			if(myoptions.getString("sendDebugInfoToJumio")!="")
 			{
 				netverifySDK.sendDebugInfoToJumio(Boolean.parseBoolean(myoptions.getString("sendDebugInfoToJumio")));
 
 			}
+			mychecker=  mychecker.concat("10");
 			if(myoptions.getString("dataExtractionOnMobileOnly")!="")
 			{
 				netverifySDK.setDataExtractionOnMobileOnly(Boolean.parseBoolean(myoptions.getString("dataExtractionOnMobileOnly")));
 			}
+			mychecker=  mychecker.concat("11");
 			if(myoptions.getString("cameraPosition")!="")
 			{
 				JumioCameraPosition cameraPosition = (myoptions.getString("cameraPosition").toLowerCase().equals("front")) ? JumioCameraPosition.FRONT : JumioCameraPosition.BACK;
 				netverifySDK.setCameraPosition(cameraPosition);
 			}
+			mychecker=  mychecker.concat("12");
 			ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
 			documentTypes.add(NVDocumentType.PASSPORT);
 			documentTypes.add(NVDocumentType.DRIVER_LICENSE);			
 			documentTypes.add(NVDocumentType.IDENTITY_CARD);
 			documentTypes.add(NVDocumentType.VISA);
 			netverifySDK.setPreselectedDocumentTypes(documentTypes);
-
+			mychecker=  mychecker.concat("13");
 			/*if(mystring!="|"){
 				showErrorMessage(myoptions.getString("customerId"));
 				return;
 			}*/
 			
 		 } catch (JSONException e) {
-				showErrorMessage("KYLE'S IMPLEMENTATION ERROR");
+				showErrorMessage("KYLE'S IMPLEMENTATION ERROR" + mychecker);
 				return;
 			}
 		//End of Kyle's Implementation of setting up the netverify SDK (Has its own Try catch)
