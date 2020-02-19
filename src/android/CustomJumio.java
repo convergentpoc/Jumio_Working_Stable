@@ -555,14 +555,11 @@ private void initNetverify(JSONArray data) {
 			JSONObject myoptions = new JSONObject(mystring); //Options are now here
 			mychecker=  mychecker.concat("1");
 			if(myoptions.has("requireVerification"))
-			{
-				if(myoptions.getString("requireVerification")!="")
+			{if(myoptions.getString("requireVerification")!="")
 				{
 					netverifySDK.setRequireVerification(Boolean.parseBoolean(myoptions.getString("requireVerification")));
 				}
 			}
-			
-			
 			mychecker=  mychecker.concat("2");
 			if(myoptions.has("callbackUrl"))
 			{	
@@ -657,73 +654,8 @@ private void initNetverify(JSONArray data) {
 		 } catch (JSONException e) {
 				showErrorMessage("KYLE'S IMPLEMENTATION ERROR" + mychecker);
 				return;
-			}
-		//End of Kyle's Implementation of setting up the netverify SDK (Has its own Try catch)
-		/*
-		// Configuration options, assume that it does not pass here ,will comment in the future
-		if (!data.isNull(0)) {
-			JSONObject options = data.getJSONObject(0);
-			Iterator < String > keys = options.keys();
-			while (keys.hasNext()) {
-				//String key = keys.next();
-				if (key.equalsIgnoreCase("requireVerification")) {
-					netverifySDK.setRequireVerification(options.getBoolean(key));
-				} else if (key.equalsIgnoreCase("callbackUrl")) {
-					netverifySDK.setCallbackUrl(options.getString(key));
-				} else if (key.equalsIgnoreCase("requireFaceMatch")) {
-					netverifySDK.setRequireFaceMatch(options.getBoolean(key));
-				} else if (key.equalsIgnoreCase("preselectedCountry")) {
-					netverifySDK.setPreselectedCountry(options.getString(key));
-				} else if (key.equalsIgnoreCase("merchantScanReference")) {
-					netverifySDK.setMerchantScanReference(options.getString(key));
-				} else if (key.equalsIgnoreCase("merchantReportingCriteria")) {
-					netverifySDK.setMerchantReportingCriteria(options.getString(key));
-				} else if (key.equalsIgnoreCase("customerID")) {
-					netverifySDK.setCustomerId(options.getString(key));
-				} else if (key.equalsIgnoreCase("enableEpassport")) {
-					netverifySDK.setEnableEMRTD(options.getBoolean(key));
-				} else if (key.equalsIgnoreCase("sendDebugInfoToJumio")) {
-					netverifySDK.sendDebugInfoToJumio(options.getBoolean(key));
-				} else if (key.equalsIgnoreCase("dataExtractionOnMobileOnly")) {
-					netverifySDK.setDataExtractionOnMobileOnly(options.getBoolean(key));
-				} else if (key.equalsIgnoreCase("cameraPosition")) {
-					JumioCameraPosition cameraPosition = (options.getString(key).toLowerCase().equals("front")) ? JumioCameraPosition.FRONT : JumioCameraPosition.BACK;
-					netverifySDK.setCameraPosition(cameraPosition);
-				} else if (key.equalsIgnoreCase("preselectedDocumentVariant")) {
-					NVDocumentVariant variant = (options.getString(key).toLowerCase().equals("paper")) ? NVDocumentVariant.PAPER : NVDocumentVariant.PLASTIC;
-					netverifySDK.setPreselectedDocumentVariant(variant);
-				} else if (key.equalsIgnoreCase("documentTypes")) {
-					JSONArray jsonTypes = options.getJSONArray(key);
-					ArrayList < String > types = new ArrayList < String > ();
-					if (jsonTypes != null) {
-						int len = jsonTypes.length();
-						for (int i = 0; i < len; i++) {
-							types.add(jsonTypes.get(i).toString());
-						}
-					}
-
-					ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
-					for (String type: types) {
-						if (type.toLowerCase().equals("passport")) {
-							documentTypes.add(NVDocumentType.PASSPORT);
-						} else if (type.toLowerCase().equals("driver_license")) {
-							documentTypes.add(NVDocumentType.DRIVER_LICENSE);
-						} else if (type.toLowerCase().equals("identity_card")) {
-							documentTypes.add(NVDocumentType.IDENTITY_CARD);
-						} else if (type.toLowerCase().equals("visa")) {
-							documentTypes.add(NVDocumentType.VISA);
-						}
-					}
-
-					netverifySDK.setPreselectedDocumentTypes(documentTypes);
-				}
-			}
-		}
-		
-
-	} catch (JSONException e) {
-		showErrorMessage("Invalid parameters: " + e.getLocalizedMessage());
-	*/} catch (PlatformNotSupportedException e) {
+		 }
+		} catch (PlatformNotSupportedException e) {
 		showErrorMessage("Error initializing the Netverify SDK: " + e.getLocalizedMessage());
 	}
 }
