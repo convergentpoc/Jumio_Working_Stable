@@ -53,7 +53,9 @@ public class CustomJumio extends CordovaPlugin {
 	private static final String ACTION_NV_START2 = "startNetverify2";
 	private static final String ACTION_DV_INIT = "initDocumentVerification";
 	private static final String ACTION_DV_START = "startDocumentVerification";
-
+	
+	private static final String ACTION_NV_SETDOCU = "SetDocument";
+	
 	private BamSDK bamSDK;
 	private NetverifySDK netverifySDK;
 	private DocumentVerificationSDK documentVerificationSDK;
@@ -139,7 +141,13 @@ public class CustomJumio extends CordovaPlugin {
 			result = new PluginResult(Status.NO_RESULT);
 			result.setKeepCallback(true);
 			return true;
-		} else {
+		}else if (action.equals(ACTION_NV_SETDOCU)) {
+			setNVDocument(args);
+			result = new PluginResult(Status.OK);
+			this.callbackContext.sendPluginResult(result);
+			result.setKeepCallback(false);
+			return true;
+		}else {
 			result = new PluginResult(Status.INVALID_ACTION);
 			callbackContext.error("Invalid Action");
 			return false;
@@ -1001,6 +1009,29 @@ private void initNetverify(JSONArray data) {
 			callbackContext.error(errorResult);
 		}catch (JSONException e) {
 			Log.e(TAG, e.getLocalizedMessage());
+		}
+	}
+	
+	private void setNVDocument(String msg) {
+		
+		try{
+			ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
+
+			if (msg.toLowerCase().equals("passport")) {
+				documentTypes.add(NVDocumentType.PASSPORT);
+			} else if (msg.toLowerCase().equals("driver_license")) {
+				documentTypes.add(NVDocumentType.DRIVER_LICENSE);
+			} else if (msg.toLowerCase().equals("identity_card")) {
+				documentTypes.add(NVDocumentType.IDENTITY_CARD);
+			} else if (msg.toLowerCase().equals("visa")) {
+				documentTypes.add(NVDocumentType.VISA);
+			}
+					
+			netverifySDK.setPreselectedDocumentTypes(documentTypes);
+			netverifySDK.setPreselectedDocumentVariant(NVDocumentVariant.PLASTIC); //NVDocumentVariant.PAPER : NVDocumentVariant.PLASTIC
+
+		}catch (Exception e) {
+					showErrorMessage("Error Setting the Document: " + msg);
 		}
 	}
 
