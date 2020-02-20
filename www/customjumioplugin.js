@@ -92,5 +92,7 @@ cordova.addConstructor(CustomJumio.install);
 
 //Custom Calls by kyle feb 20,2020
 CustomJumio.prototype.NetVerify_SetDocu = function(document, successCallback, errorCallback) {
-  cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'SetDocument', document);
+  var DocumentData = {};
+  DocumentData.document = document;
+  cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'SetDocument', [DocumentData]);
 }
