@@ -1012,11 +1012,15 @@ private void initNetverify(JSONArray data) {
 		}
 	}
 	
-	private void setNVDocument(String msg) {
+	private void setNVDocument(JSONArray data) {
 		
 		try{
 			ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
-
+			String msg = "";
+			   JSONObject options1 = data.getJSONObject(0);
+			   msg = options1.getString("document");
+			   
+			
 			if (msg.toLowerCase().equals("passport")) {
 				documentTypes.add(NVDocumentType.PASSPORT);
 			} else if (msg.toLowerCase().equals("driver_license")) {
