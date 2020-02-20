@@ -56,7 +56,8 @@ public class CustomJumio extends CordovaPlugin {
 	private static final String ACTION_DV_START = "startDocumentVerification";
 	
 	private static final String ACTION_NV_SETDOCU = "SetDocument";
-	private static final String ACTION_NV_INIT_LIGHT = "initNetverify_Light";
+	private static final String ACTION_NV_SET_LIGHT = "initNetverify_Light";
+	private static final String ACTION_NV_INIT_LIGHT = "PreloadNetverify_Light";
 	
 	private BamSDK bamSDK;
 	private NetverifySDK netverifySDK;
@@ -149,11 +150,16 @@ public class CustomJumio extends CordovaPlugin {
 			this.callbackContext.sendPluginResult(result);
 			result.setKeepCallback(false);
 			return true;
-		}else if (action.equals(ACTION_NV_INIT_LIGHT)) {
-			initNetverify_light(args);
+		}else if (action.equals(ACTION_NV_SET_LIGHT)) {
+			setNV_light(args);
 			result = new PluginResult(Status.OK);
 			this.callbackContext.sendPluginResult(result);
 			result.setKeepCallback(false);
+			return true;
+		}else if (action.equals(ACTION_NV_INIT_LIGHT)) {
+			initNV_light(args);
+			result = new PluginResult(Status.OK);
+			result.setKeepCallback(true);
 			return true;
 		}
 	  else {
@@ -1048,7 +1054,7 @@ private void initNetverify(JSONArray data) {
 		}
 	}
 
-	private void initNetverify_light(JSONArray data) {
+	private void setNV_light(JSONArray data) {
 	if (!NetverifySDK.isSupportedPlatform(cordova.getActivity())) {
 		showErrorMessage("This platform is not supported.");
 		return;
@@ -1171,16 +1177,6 @@ private void initNetverify(JSONArray data) {
 				}
 			}
 			mychecker=  mychecker.concat("12");
-			netverifySDK.initiate(new NetverifyInitiateCallback() {
-				@Override
-				public void onNetverifyInitiateSuccess() {
-						callbackContext.success("NetVerify SDK initialized successfully");
-				}
-				@Override
-				public void onNetverifyInitiateError(String errorCode, String errorMessage, boolean retryPossible) {
-						showErrorMessage("Authentication initiate failed - " + errorCode + ": " + errorMessage);
-				}
-			});
 			
 		 } catch (JSONException e) {
 				showErrorMessage("KYLE'S IMPLEMENTATION ERROR" + mychecker);
@@ -1190,6 +1186,27 @@ private void initNetverify(JSONArray data) {
 		showErrorMessage("Error initializing the Netverify SDK: " + e.getLocalizedMessage());
 	}
 
+	private void initNV_light(JSONArray data) {
+		if (netverifySDK == null) {
+			showErrorMessage("The Netverify SDK is not initialized yet. Call initNetverify() first.");
+			return;
+		}
+		
+		netverifySDK.initiate(new NetverifyInitiateCallback() {
+				@Override
+				public void onNetverifyInitiateSuccess() {
+						callbackContext.success("NetVerify SDK initialized successfully");
+				}
+				@Override
+				public void onNetverifyInitiateError(String errorCode, String errorMessage, boolean retryPossible) {
+						showErrorMessage("Authentication initiate failed - " + errorCode + ": " + errorMessage);
+				}
+			});
+
+		this.cordova.setActivityResultCallback(this);
+		this.cordova.getActivity().runOnUiThread(runnable);
+	}
+		
 	private void sendErrorObject(String errorCode, String errorMsg, String scanReference) {
 		try {
 			JSONObject errorResult = new JSONObject();
