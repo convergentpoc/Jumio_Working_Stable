@@ -1203,8 +1203,19 @@ private void initNetverify(JSONArray data) {
 				}
 			});
 
+		/*Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					checkPermissionsAndStart(netverifySDK);
+				} catch (Exception e) {
+					showErrorMessage("Error starting the Netverify SDK: " + e.getLocalizedMessage());
+				}
+			}
+		};
+
 		this.cordova.setActivityResultCallback(this);
-		this.cordova.getActivity().runOnUiThread(runnable);
+		this.cordova.getActivity().runOnUiThread(runnable);*/ //implement this to check why duplicate screens occur
 	}
 		
 	private void sendErrorObject(String errorCode, String errorMsg, String scanReference) {
