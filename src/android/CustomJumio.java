@@ -1302,15 +1302,15 @@ private void initNetverify(JSONArray data) {
 					JumioCameraPosition cameraPosition = (myoptions.getString("cameraPosition").toLowerCase().equals("front")) ? JumioCameraPosition.FRONT : JumioCameraPosition.BACK;
 					netverifySDK.setCameraPosition(cameraPosition);}
 			}
-			if(myoptions.has("document")){
+			if(myoptions.has("documentTypes")){
 				ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
-				if (myoptions.getString("document").toLowerCase().equals("passport")) {
+				if (myoptions.getString("documentTypes").toLowerCase().equals("passport")) {
 					documentTypes.add(NVDocumentType.PASSPORT);} 
-				else if (myoptions.getString("document").toLowerCase().equals("driver_license")) {
+				else if (myoptions.getString("documentTypes").toLowerCase().equals("driver_license")) {
 					documentTypes.add(NVDocumentType.DRIVER_LICENSE);} 
-				else if (myoptions.getString("document").toLowerCase().equals("identity_card")) {
+				else if (myoptions.getString("documentTypes").toLowerCase().equals("identity_card")) {
 					documentTypes.add(NVDocumentType.IDENTITY_CARD);} 
-				else if (myoptions.getString("document").toLowerCase().equals("visa")) {
+				else if (myoptions.getString("documentTypes").toLowerCase().equals("visa")) {
 					documentTypes.add(NVDocumentType.VISA);}
 				
 				netverifySDK.setPreselectedDocumentTypes(documentTypes);
