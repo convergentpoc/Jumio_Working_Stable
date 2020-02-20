@@ -58,6 +58,7 @@ public class CustomJumio extends CordovaPlugin {
 	private static final String ACTION_NV_SETDOCU = "SetDocument";
 	private static final String ACTION_NV_SET_LIGHT = "initNetverify_Light";
 	private static final String ACTION_NV_INIT_LIGHT = "PreloadNetverify_Light";
+	private static final String ACTION_NV_ON_READY = "NetVerifyOnReady";
 	
 	private BamSDK bamSDK;
 	private NetverifySDK netverifySDK;
@@ -161,7 +162,13 @@ public class CustomJumio extends CordovaPlugin {
 			result = new PluginResult(Status.OK);
 			result.setKeepCallback(true);
 			return true;
+		}else if (action.equals(ACTION_NV_ON_READY)) {
+			onReadyNV(args);
+			result = new PluginResult(Status.OK);
+			result.setKeepCallback(true);
+			return true;
 		}
+	  
 	  else {
 			result = new PluginResult(Status.INVALID_ACTION);
 			callbackContext.error("Invalid Action");
@@ -1184,7 +1191,7 @@ private void initNetverify(JSONArray data) {
 		 }
 		} catch (PlatformNotSupportedException e) {
 		showErrorMessage("Error initializing the Netverify SDK: " + e.getLocalizedMessage());
-	}
+		}
 	}
 	private void initNV_light(JSONArray data) {
 		if (netverifySDK == null) {
@@ -1217,7 +1224,134 @@ private void initNetverify(JSONArray data) {
 		this.cordova.setActivityResultCallback(this);
 		this.cordova.getActivity().runOnUiThread(runnable);*/ //implement this to check why duplicate screens occur
 	}
+	
+	private void onReadyNV(JSONArray data) {
+	if (!NetverifySDK.isSupportedPlatform(cordova.getActivity())) {
+		showErrorMessage("This platform is not supported.");
+		return;}
+
+	try {
+
+		String token;
+		String secret;
+		String dtaCenter;
+		try {
+			JSONObject options = data.getJSONObject(0);
+			token = options.getString("token");
+			secret = options.getString("secret");
+			dtaCenter = options.getString("datacenter");
+		} catch (JSONException e) {
+			callbackContext.error("Error Encountered: " + e.getMessage());
+			return;
+		}
+
+		String apiToken = token; 
+		String apiSecret = secret; 
+		JumioDataCenter dataCenter = (dtaCenter.toLowerCase().equalsIgnoreCase("us")) ? JumioDataCenter.US : JumioDataCenter.EU;
+		netverifySDK = NetverifySDK.create(cordova.getActivity(), apiToken, apiSecret, dataCenter);
+
+		try {
 		
+			JSONObject options1 = data.getJSONObject(0);
+			String mystring="|";
+			mystring = options1.getString("options");
+			JSONObject myoptions = new JSONObject(mystring); //Options are now here
+			
+			if(myoptions.has("requireVerification")){
+				if(myoptions.getString("requireVerification")!=""){
+					netverifySDK.setRequireVerification(Boolean.parseBoolean(myoptions.getString("requireVerification")));}
+			}
+			if(myoptions.has("callbackUrl")){	
+				if(myoptions.getString("callbackUrl")!=""){
+					netverifySDK.setCallbackUrl(myoptions.getString("callbackUrl"));}
+			}
+			if(myoptions.has("requireFaceMatch")){
+				if(myoptions.getString("requireFaceMatch")!=""){
+					netverifySDK.setRequireFaceMatch(Boolean.parseBoolean(myoptions.getString("requireFaceMatch")));}
+			}
+			if(myoptions.has("preselectedCountry")){
+				if(myoptions.getString("preselectedCountry")!=""){
+					netverifySDK.setPreselectedCountry(myoptions.getString("preselectedCountry"));}
+			}
+			if(myoptions.has("merchantScanReference")){
+				if(myoptions.getString("merchantScanReference")!=""){
+					netverifySDK.setMerchantScanReference(myoptions.getString("merchantScanReference"));}
+			}
+			if(myoptions.has("merchantReportingCriteria")){
+				if(myoptions.getString("merchantReportingCriteria")!=""){
+					netverifySDK.setMerchantReportingCriteria(myoptions.getString("merchantReportingCriteria"));}
+			}
+			if(myoptions.has("customerID")){
+				if(myoptions.getString("customerID")!=""){
+					netverifySDK.setCustomerId(myoptions.getString("customerID"));}
+			}
+			if(myoptions.has("enableEpassport")){
+				if(myoptions.getString("enableEpassport")!=""){
+					netverifySDK.setEnableEMRTD(Boolean.parseBoolean(myoptions.getString("enableEpassport")));}
+			}
+			if(myoptions.has("sendDebugInfoToJumio")){
+				if(myoptions.getString("sendDebugInfoToJumio")!=""){
+					netverifySDK.sendDebugInfoToJumio(Boolean.parseBoolean(myoptions.getString("sendDebugInfoToJumio")));}
+			}
+			if(myoptions.has("requireVerificdataExtractionOnMobileOnlyation")){
+				if(myoptions.getString("dataExtractionOnMobileOnly")!=""){
+					netverifySDK.setDataExtractionOnMobileOnly(Boolean.parseBoolean(myoptions.getString("dataExtractionOnMobileOnly")));}
+			}
+			if(myoptions.has("cameraPosition")){
+				if(myoptions.getString("cameraPosition")!=""){
+					JumioCameraPosition cameraPosition = (myoptions.getString("cameraPosition").toLowerCase().equals("front")) ? JumioCameraPosition.FRONT : JumioCameraPosition.BACK;
+					netverifySDK.setCameraPosition(cameraPosition);}
+			}
+			if(myoptions.has("document")){
+				ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
+				if (myoptions.getString("document").toLowerCase().equals("passport")) {
+					documentTypes.add(NVDocumentType.PASSPORT);} 
+				else if (myoptions.getString("document").toLowerCase().equals("driver_license")) {
+					documentTypes.add(NVDocumentType.DRIVER_LICENSE);} 
+				else if (myoptions.getString("document").toLowerCase().equals("identity_card")) {
+					documentTypes.add(NVDocumentType.IDENTITY_CARD);} 
+				else if (myoptions.getString("document").toLowerCase().equals("visa")) {
+					documentTypes.add(NVDocumentType.VISA);}
+				
+				netverifySDK.setPreselectedDocumentTypes(documentTypes);
+				netverifySDK.setPreselectedDocumentVariant(NVDocumentVariant.PLASTIC);
+			}
+
+		     }catch (JSONException e) {
+			showErrorMessage("KYLE'S IMPLEMENTATION ERROR");
+				return;}
+	     }catch (PlatformNotSupportedException e) {
+			showErrorMessage("Error initializing the Netverify SDK: " + e.getLocalizedMessage());}
+		
+		if (netverifySDK == null) {
+			showErrorMessage("The Netverify SDK is not initialized yet. Call initNetverify() first.");
+			return;
+		}
+		
+	netverifySDK.initiate(new NetverifyInitiateCallback() {
+		@Override
+		public void onNetverifyInitiateSuccess() {
+				callbackContext.success("NetVerify SDK initialized successfully");}
+		@Override
+		public void onNetverifyInitiateError(String errorCode, String errorMessage, boolean retryPossible) {
+				showErrorMessage("Authentication initiate failed - " + errorCode + ": " + errorMessage);}
+		});
+
+		/*Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					checkPermissionsAndStart(netverifySDK);
+				} catch (Exception e) {
+					showErrorMessage("Error starting the Netverify SDK: " + e.getLocalizedMessage());
+				}
+			}
+		};
+		this.cordova.setActivityResultCallback(this);
+		this.cordova.getActivity().runOnUiThread(runnable);*/ //implement this to check why duplicate screens occur
+	}
+		
+	
 	private void sendErrorObject(String errorCode, String errorMsg, String scanReference) {
 		try {
 			JSONObject errorResult = new JSONObject();
