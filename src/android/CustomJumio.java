@@ -1013,10 +1013,10 @@ private void initNetverify(JSONArray data) {
 	}
 	
 	private void setNVDocument(JSONArray data) {
-		
+		String msg = "";
 		try{
 			ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
-			String msg = "";
+			
 			   JSONObject options1 = data.getJSONObject(0);
 			   msg = options1.getString("document");
 			   
