@@ -1185,7 +1185,7 @@ private void initNetverify(JSONArray data) {
 		} catch (PlatformNotSupportedException e) {
 		showErrorMessage("Error initializing the Netverify SDK: " + e.getLocalizedMessage());
 	}
-
+	}
 	private void initNV_light(JSONArray data) {
 		if (netverifySDK == null) {
 			showErrorMessage("The Netverify SDK is not initialized yet. Call initNetverify() first.");
