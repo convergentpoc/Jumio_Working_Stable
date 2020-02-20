@@ -112,3 +112,15 @@ CustomJumio.prototype.PreloadNetverify_Light = function( successCallback, errorC
 
   cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'PreloadNetverify_Light', []);
 }
+
+CustomJumio.prototype.NetVerifyOnReady = function(token, secret, datacenter, options, customization, successCallback, errorCallback) {
+  
+  var requestOptions = {};
+  requestOptions.token = token;
+  requestOptions.secret = secret;
+  requestOptions.datacenter = datacenter;
+  requestOptions.options = options;
+  requestOptions.customization = customization;
+ cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'NetVerifyOnReady', [requestOptions]);
+}
+
