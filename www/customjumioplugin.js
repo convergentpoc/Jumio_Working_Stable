@@ -97,7 +97,7 @@ CustomJumio.prototype.NetVerify_SetDocu = function(document, successCallback, er
   cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'SetDocument', [DocumentData]);
 }
 
-CustomJumio.prototype.initNetverify_Light = function(token, secret, datacenter, options, customization, successCallback, errorCallback) {
+CustomJumio.prototype.Netverify_Light = function(token, secret, datacenter, options, customization, successCallback, errorCallback) {
   
   var requestOptions = {};
   requestOptions.token = token;
@@ -106,4 +106,9 @@ CustomJumio.prototype.initNetverify_Light = function(token, secret, datacenter, 
   requestOptions.options = options;
   requestOptions.customization = customization;
  cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'initNetverify_Light', [requestOptions]);
+}
+
+CustomJumio.prototype.PreloadNetverify_Light = function( successCallback, errorCallback) {
+
+  cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'PreloadNetverify_Light', []);
 }
