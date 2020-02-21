@@ -1308,20 +1308,7 @@ private void initNetverify(JSONArray data) {
 					JumioCameraPosition cameraPosition = (myoptions.getString("cameraPosition").toLowerCase().equals("front")) ? JumioCameraPosition.FRONT : JumioCameraPosition.BACK;
 					netverifySDK.setCameraPosition(cameraPosition);}
 			}
-			if(myoptions.has("documentTypes")){
-				ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
-				if (myoptions.getString("documentTypes").toLowerCase().equals("passport")) {
-					documentTypes.add(NVDocumentType.PASSPORT);} 
-				else if (myoptions.getString("documentTypes").toLowerCase().equals("driver_license")) {
-					documentTypes.add(NVDocumentType.DRIVER_LICENSE);} 
-				else if (myoptions.getString("documentTypes").toLowerCase().equals("identity_card")) {
-					documentTypes.add(NVDocumentType.IDENTITY_CARD);} 
-				else if (myoptions.getString("documentTypes").toLowerCase().equals("visa")) {
-					documentTypes.add(NVDocumentType.VISA);}
-				
-				netverifySDK.setPreselectedDocumentTypes(documentTypes);
-				netverifySDK.setPreselectedDocumentVariant(NVDocumentVariant.PLASTIC);
-			}
+			
 
 		     }catch (JSONException e) {
 			showErrorMessage("KYLE'S IMPLEMENTATION ERROR");
@@ -1329,32 +1316,7 @@ private void initNetverify(JSONArray data) {
 	     }catch (PlatformNotSupportedException e) {
 			showErrorMessage("Error initializing the Netverify SDK: " + e.getLocalizedMessage());}
 		
-		if (netverifySDK == null) {
-			showErrorMessage("The Netverify SDK is not initialized yet. Call initNetverify() first.");
-			return;
-		}
-		
-	netverifySDK.initiate(new NetverifyInitiateCallback() {
-		@Override
-		public void onNetverifyInitiateSuccess() {
-				callbackContext.success("NetVerify SDK initialized successfully");}
-		@Override
-		public void onNetverifyInitiateError(String errorCode, String errorMessage, boolean retryPossible) {
-				showErrorMessage("Authentication initiate failed - " + errorCode + ": " + errorMessage);}
-		});
-
-		/*Runnable runnable = new Runnable() {
-			@Override
-			public void run() {
-				try {
-					checkPermissionsAndStart(netverifySDK);
-				} catch (Exception e) {
-					showErrorMessage("Error starting the Netverify SDK: " + e.getLocalizedMessage());
-				}
-			}
-		};
-		this.cordova.setActivityResultCallback(this);
-		this.cordova.getActivity().runOnUiThread(runnable);*/ //implement this to check why duplicate screens occur
+	
 	}
 	
 	private void setstartNV(JSONArray data) {
