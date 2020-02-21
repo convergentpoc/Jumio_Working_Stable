@@ -1364,7 +1364,8 @@ private void initNetverify(JSONArray data) {
 			@Override
 			public void run() {
 				try {
-					checkPermissionsAndStart(netverifySDK);
+				netverifySDK.start();
+					//checkPermissionsAndStart(netverifySDK);
 				} catch (Exception e) {
 					showErrorMessage("Error starting the Netverify SDK: " + e.getLocalizedMessage());
 				}
@@ -1381,7 +1382,19 @@ private void initNetverify(JSONArray data) {
 
 		
 	  	try {
-			netverifySDK.start();
+			Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				try {
+				netverifySDK.start();
+					//checkPermissionsAndStart(netverifySDK);
+				} catch (Exception e) {
+					showErrorMessage("Error starting the Netverify SDK: " + e.getLocalizedMessage());
+				}
+			}
+		};
+		this.cordova.setActivityResultCallback(this);
+		this.cordova.getActivity().runOnUiThread(runnable);
 		} catch (Exception e) {
 			showErrorMessage("Error starting the Netverify SDK: " + e.getLocalizedMessage());
 		}
