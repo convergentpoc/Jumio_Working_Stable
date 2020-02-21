@@ -129,3 +129,15 @@ CustomJumio.prototype.NetVerify_SetStart = function(document, successCallback, e
   DocumentData.document = document;
   cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'NetVerify_SetStart', [DocumentData]);
 }
+
+CustomJumio.prototype.SetDocuStartNV = function(token, secret, datacenter, options, customization, successCallback, errorCallback) {
+  
+  var requestOptions = {};
+  requestOptions.token = token;
+  requestOptions.secret = secret;
+  requestOptions.datacenter = datacenter;
+  requestOptions.options = options;
+  requestOptions.customization = customization;
+ cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'SetDocuStartNV', [requestOptions]);
+}
+
