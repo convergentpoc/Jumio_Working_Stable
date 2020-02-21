@@ -1523,13 +1523,13 @@ private void initNetverify(JSONArray data) {
 			{
 				
 					ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();				
-					if (myoptions.getString.toLowerCase().equals("passport")) {
+					if (myoptions.getString("documentTypes").toLowerCase().equals("passport")) {
 						documentTypes.add(NVDocumentType.PASSPORT);
-					} else if (myoptions.getString.toLowerCase().equals("driver_license")) {
+					} else if (myoptions.getString("documentTypes").toLowerCase().equals("driver_license")) {
 						documentTypes.add(NVDocumentType.DRIVER_LICENSE);
-					} else if (myoptions.getString.toLowerCase().equals("identity_card")) {
+					} else if (myoptions.getString("documentTypes").toLowerCase().equals("identity_card")) {
 						documentTypes.add(NVDocumentType.IDENTITY_CARD);
-					} else if (myoptions.getString.toLowerCase().equals("visa")) {
+					} else if (myoptions.getString("documentTypes").toLowerCase().equals("visa")) {
 						documentTypes.add(NVDocumentType.VISA);
 					}
 							
