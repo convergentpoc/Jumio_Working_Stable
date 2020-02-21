@@ -59,6 +59,7 @@ public class CustomJumio extends CordovaPlugin {
 	private static final String ACTION_NV_SET_LIGHT = "initNetverify_Light";
 	private static final String ACTION_NV_INIT_LIGHT = "PreloadNetverify_Light";
 	private static final String ACTION_NV_ON_READY = "NetVerifyOnReady";
+	private static final String ACTION_NV_SET_START = "NetVerify_SetStart";
 	
 	private BamSDK bamSDK;
 	private NetverifySDK netverifySDK;
@@ -164,6 +165,11 @@ public class CustomJumio extends CordovaPlugin {
 			return true;
 		}else if (action.equals(ACTION_NV_ON_READY)) {
 			onReadyNV(args);
+			result = new PluginResult(Status.OK);
+			result.setKeepCallback(true);
+			return true;
+		}else if (action.equals(ACTION_NV_SET_START)) {
+			setstartNV(args);
 			result = new PluginResult(Status.OK);
 			result.setKeepCallback(true);
 			return true;
@@ -1349,6 +1355,76 @@ private void initNetverify(JSONArray data) {
 		};
 		this.cordova.setActivityResultCallback(this);
 		this.cordova.getActivity().runOnUiThread(runnable);*/ //implement this to check why duplicate screens occur
+	}
+	
+	private void setstartNV(JSONArray data) {
+		//setting of document
+		String msg = "";
+		try{
+			ArrayList < NVDocumentType > documentTypes = new ArrayList < NVDocumentType > ();
+			JSONObject options1 = data.getJSONObject(0);
+			msg = options1.getString("document");
+			
+			if (msg.toLowerCase().equals("passport")) {
+				documentTypes.add(NVDocumentType.PASSPORT);
+			} else if (msg.toLowerCase().equals("driver_license")) {
+				documentTypes.add(NVDocumentType.DRIVER_LICENSE);
+			} else if (msg.toLowerCase().equals("identity_card")) {
+				documentTypes.add(NVDocumentType.IDENTITY_CARD);
+			} else if (msg.toLowerCase().equals("visa")) {
+				documentTypes.add(NVDocumentType.VISA);
+			}
+					
+			netverifySDK.setPreselectedDocumentTypes(documentTypes);
+			netverifySDK.setPreselectedDocumentVariant(NVDocumentVariant.PLASTIC); //NVDocumentVariant.PAPER : NVDocumentVariant.PLASTIC
+
+		}catch (Exception e) {
+					showErrorMessage("Error Setting the Document: " + msg);}
+		//PreLoading
+		if (netverifySDK == null) {
+			showErrorMessage("The Netverify SDK is not initialized yet. Call initNetverify() first.");
+			return;
+		}
+		
+		netverifySDK.initiate(new NetverifyInitiateCallback() {
+				@Override
+				public void onNetverifyInitiateSuccess() {
+						callbackContext.success("NetVerify SDK initialized successfully");
+				}
+				@Override
+				public void onNetverifyInitiateError(String errorCode, String errorMessage, boolean retryPossible) {
+						showErrorMessage("Authentication initiate failed - " + errorCode + ": " + errorMessage);
+				}
+			});
+
+		/* //implement this to check why duplicate screens occur
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					checkPermissionsAndStart(netverifySDK);
+				} catch (Exception e) {
+					showErrorMessage("Error starting the Netverify SDK: " + e.getLocalizedMessage());
+				}
+			}
+		};
+		this.cordova.setActivityResultCallback(this);
+		this.cordova.getActivity().runOnUiThread(runnable);
+		*/ 	
+		
+		//starting
+		if (netverifySDK == null) {
+			showErrorMessage("The Netverify SDK is not initialized yet. Call initNetverify() first.");
+			return;}
+
+		
+	  	try {
+			netverifySDK.start();
+		} catch (Exception e) {
+			showErrorMessage("Error starting the Netverify SDK: " + e.getLocalizedMessage());
+		}
+		
+	
 	}
 		
 	
