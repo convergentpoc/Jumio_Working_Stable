@@ -1351,7 +1351,7 @@ private void initNetverify(JSONArray data) {
 		netverifySDK.initiate(new NetverifyInitiateCallback() {
 				@Override
 				public void onNetverifyInitiateSuccess() {
-						callbackContext.success("NetVerify SDK initialized successfully");
+						//callbackContext.success("NetVerify SDK initialized successfully");
 				}
 				@Override
 				public void onNetverifyInitiateError(String errorCode, String errorMessage, boolean retryPossible) {
