@@ -124,3 +124,8 @@ CustomJumio.prototype.NetVerifyOnReady = function(token, secret, datacenter, opt
  cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'NetVerifyOnReady', [requestOptions]);
 }
 
+CustomJumio.prototype.NetVerify_SetStart = function(document, successCallback, errorCallback) {
+  var DocumentData = {};
+  DocumentData.document = document;
+  cordova.exec(successCallback,  errorCallback, 'CustomJumio', 'SetDocument', [DocumentData]);
+}
