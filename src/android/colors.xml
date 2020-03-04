@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="colorPrimary">@color/jumiogreen</color>
+	<color name="colorPrimaryDark">@color/jumiogreen_dark</color>
+	<color name="colorAccent">#4B4948</color>
+
+	<color name="jumiogreen">#FAFAFA</color>
+	<color name="jumiogreen_dark">#4A4A4A</color>
+	<color name="darkgrey_4D4D4D">#424242</color>
+	<color name="darkgrey_676767">#616161</color>
+</resources>
