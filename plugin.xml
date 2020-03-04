@@ -80,7 +80,7 @@
                 android:windowSoftInputMode="adjustResize"
                 android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
                 android:hardwareAccelerated="true"
-                android:theme="@style/Theme.Netverify"/>
+                android:theme="@style/CustomNetverifyTheme"/>
             <activity
                 android:name="com.jumio.dv.DocumentVerificationActivity"
                 android:windowSoftInputMode="adjustResize"
@@ -98,6 +98,8 @@
         </config-file>
 	
         <source-file src="src/android/CustomJumio.java" target-dir="src/com/stratpoint/cordova/plugin" />
+    	<resource-file src="src/android/styles.xml" target="res/values/styles.xml" />
+	<resource-file src="src/android/colors.xml" target="res/values/colors.xml" />
         <!-- Original Content End -->
 
         <proguard-config>
