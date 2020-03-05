@@ -26,40 +26,8 @@
     <!-- <dependency id="cordova-plugin-cocoapod-support" /> -->
     <!-- Modification End -->
 
-    <!-- iOS Platform Modification -->
-    <platform name="ios">
-        <config-file target="config.xml" parent="/*">
-            <feature name="JumioMobileSDK">
-                <param name="ios-package" value="JumioMobileSDK" />
-            </feature>
-        </config-file>
-        <header-file src="src/ios/JumioMobileSDK.h" />
-        <source-file src="src/ios/JumioMobileSDK.m" />
-        
-        <preference name="CAMERA_USAGE_DESCRIPTION" default="This will allow ${PRODUCT_NAME} to take photos of your credentials."/>
-        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
-            <string>$CAMERA_USAGE_DESCRIPTION</string>
-        </config-file>
-        
-        <!-- ORIGINAL CONFIGURATION USING THE COCOAPOD SUPPORT PLUGIN
+	
 
-        <pods-config ios-min-version="9.0" use-frameworks="true">
-            <source url="https://github.com/CocoaPods/Specs.git" />
-        </pods-config>
-        <pod name="JumioMobileSDK" version="2.12.0" configurations="release,debug" /> 
-    	-->
-
-    	<podspec>
-    		<config>
-    			<source url="https://github.com/CocoaPods/Specs.git" />
-    		</config>
-    		<pods use-frameworks="true">
-    			<pod name="JumioMobileSDK" tag="2.12.0" configurations="release,debug" />
-    		</pods>
-    	</podspec>
-
-    </platform>
-    <!-- iOS Platform Modification End -->
 
     <platform name="android">
         <config-file target="AndroidManifest.xml" parent="/*">
